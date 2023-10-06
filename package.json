@@ -1,5 +1,5 @@
 {
-  "name": "frontend-snippets",
+  "name": "throwaway-repo",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -33,14 +33,12 @@
     "playwright:ui": "npm exec playwright test --ui",
     "playwright:chrome": "npm exec playwright test --project=chromium",
     "playwright:report": "npm exec playwright show-report",
-    "vitest:test": "vitest",
-    "prepare:maps": "./bin/prepare-maps.js",
-    "prepare:photos": "./bin/prepare-photos.sh"
+    "vitest:test": "vitest"
   },
   "dependencies": {
     "@astrojs/check": "~0.2.0",
-    "@astrojs/mdx": "~1.1.0",
-    "astro": "~3.1.0",
+    "@astrojs/mdx": "~0.19.7",
+    "astro": "~2.10.15",
     "libphonenumber-js": "~1.10.44",
     "typescript": "~5.2.2"
   },
