@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "info": "astro info",
     "preview": "astro preview --verbose",
-    "debug": "DEBUG=true npm run dev",
+    "debug": "DEBUG=true pnpm run dev",
     "docs": "jsdoc -c ./jsdoc.config.json -r",
     "fix:js": "eslint . --fix --ext .js,.mjs,.cjs",
     "fix:md": "markdownlint \"**/*.md\" --fix",
@@ -18,24 +18,22 @@
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write .",
     "postcss": "postcss ./public/snippets/**/*.css --replace --config postcss.config.cjs",
-    "start": "npm run dev",
+    "start": "pnpm run dev",
     "sync": "astro sync",
-    "test": "npm run vitest:test",
+    "test": "pnpm run vitest:test",
     "test:all": "npm-run-all vitest:test playwright:test cypress:test",
     "cypress:ci": "start-server-and-test start http://localhost:4321 cypress:test",
-    "cypress:ui": "npm exec cypress open",
-    "cypress:debug": "DEBUG=cypress:* npm run cypress:test",
-    "cypress:test": "npm exec cypress run",
+    "cypress:ui": "pnpm exec cypress open",
+    "cypress:debug": "DEBUG=cypress:* pnpm run cypress:test",
+    "cypress:test": "pnpm exec cypress run",
     "playwright:ci": "start-server-and-test start http://localhost:4321 playwright:test",
-    "playwright:codegen": "npm exec playwright codegen",
-    "playwright:test": "npm exec playwright test",
-    "playwright:debug": "npm exec playwright test --debug",
-    "playwright:ui": "npm exec playwright test --ui",
-    "playwright:chrome": "npm exec playwright test --project=chromium",
-    "playwright:report": "npm exec playwright show-report",
-    "vitest:test": "vitest",
-    "prepare:maps": "./bin/prepare-maps.js",
-    "prepare:photos": "./bin/prepare-photos.sh"
+    "playwright:codegen": "pnpm exec playwright codegen",
+    "playwright:test": "pnpm exec playwright test",
+    "playwright:debug": "pnpm exec playwright test --debug",
+    "playwright:ui": "pnpm exec playwright test --ui",
+    "playwright:chrome": "pnpm exec playwright test --project=chromium",
+    "playwright:report": "pnpm exec playwright show-report",
+    "vitest:test": "vitest"
   },
   "dependencies": {
     "@astrojs/check": "~0.2.0",
@@ -73,5 +71,6 @@
     "ts-node": "~10.9.1",
     "vitest": "~0.34.6",
     "zod": "~3.22.4"
-  }
+  },
+  "packageManager": "pnpm@8.7.4"
 }
