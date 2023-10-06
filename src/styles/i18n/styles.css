@@ -1,0 +1,138 @@
+@import url("counter-styles.css");
+@import url("quotes.css");
+@import url("base.css");
+
+/*
+Blockquotes
+
+NOTE:
+The <cite> tag should be used for referencing creative work rather than the person who said or wrote the quote. 
+In other words, it’s not for quotes.
+
+SPECS:
+- https://www.w3.org/TR/html5-author/the-blockquote-element.html#the-blockquote-element
+- https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-cite-element
+
+READ:
+- https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/
+- https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation.html
+*/
+/*
+@see https://baymard.com/blog/line-length-readability
+
+In case there is a block-element within the blockquote,
+make sure that is inline, so that the quotation-marks (close-quote)
+are positioned correctly!
+*/
+/*
+<figure itemscope itemtype="http://schema.org/Quotation">
+  <blockquote itemprop="text" cite="#SOURCE_URL">
+    <p>QUOTE&hellip;</p>
+  </blockquote>
+
+  <figcaption>
+    <span itemprop="spokenByCharacter" itemscope itemtype="http://schema.org/Person"><span itemprop="name">NAME</span></span
+    >,
+    <cite><a href="#SOURCE_URL">PUBLICATION</a></cite>
+  </figcaption>
+</figure>
+*/
+blockquote {
+  margin-inline: 0;
+  /* max-width: 70ch; */
+}
+
+:lang(jp) blockquote,
+:lang(ko) blockquote,
+:lang(zh) blockquote {
+  max-width: 40ch;
+}
+
+/* Make sure children don not inherit text-indentation when inline */
+blockquote * {
+  text-indent: 0;
+}
+
+/* Make it appealing */
+blockquote * {
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  word-spacing: 0.16em;
+}
+
+blockquote p:first-child {
+  position: relative;
+}
+
+q::before,
+blockquote p:first-child::before {
+  content: open-quote;
+}
+
+blockquote p:first-child::before {
+  display: inline-flex;
+  justify-content: flex-end;
+  margin-inline-start: -1rem;
+  position: absolute;
+  width: 1rem;
+}
+
+q::after,
+blockquote p:last-child::after {
+  content: close-quote;
+}
+
+/* figure */
+figure {
+  margin-inline: 0;
+}
+
+figure:has(blockquote) figcaption {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/*
+  Add a quotation-dash (U+2015 ―  HORIZONTAL BAR)
+  @see https://en.wikipedia.org/wiki/Quotation_mark#Quotation_dash
+  */
+figure:has(blockquote) figcaption::before {
+  content: "\2015";
+}
+
+/* Hanging Punctuation */
+ul,
+ol {
+  margin-inline-start: -0.45em;
+  padding-inline-start: 0;
+}
+
+:where(ol) ol,
+:where(ul) ul {
+  padding-inline-start: 1em;
+}
+
+ul li,
+ol li {
+  font-variant-numeric: tabular-nums;
+  line-height: 1.75;
+  padding-inline-start: 0.45em;
+}
+
+ul li::marker {
+  /* plus sign */
+  /*content: "\002B";*/
+  content: "\2022";
+}
+
+/* Annotation List */
+ul li:has(a[href*="#:~:text="]:first-child) {
+}
+
+ul li:has(a[href*="#:~:text="]:first-child)::marker {
+  content: none;
+}
+
+ul li a[href*="#:~:text="]:first-child {
+  margin-inline-start: -1em;
+}

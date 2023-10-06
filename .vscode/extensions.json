@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "editorConfig.editorConfig",
+    "esbenp.prettier-vscode",
+    "ms-edgedevtools.vscode-edge-devtools",
+    "yoavbls.pretty-ts-errors",
+    "rbuckton.deoptexplorer-vscode",
+    "astro-build.astro-vscode",
+    "davidanson.vscode-markdownlint"
+  ]
+}

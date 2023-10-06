@@ -1,0 +1,92 @@
+.svg-hover-map-container {
+  --map-fg: var(--bg, #cccccc);
+  --map-fill: var(--fg, #333333);
+  --map-fill-active: var(--highlight, #ffdb58);
+  --map-border: var(--bg-deemphasized, #eeeeee);
+  --map-gap: var(--gap, 1.5rem);
+  --map-stroke-width: 2;
+  align-items: start;
+  column-gap: var(--map-gap);
+
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.svg-hover-map-container--landscape {
+  grid-template-columns: 1fr;
+}
+
+.svg-hover-map-container--landscape .svg-hover-map {
+  order: 1;
+}
+
+.svg-hover-map-container--landscape .svg-hover-map-container__scroller {
+  inset-block-start: calc(var(--map-gap) / 2);
+  order: 2;
+  position: relative;
+}
+
+.svg-hover-map {
+  display: block;
+  height: auto;
+  width: 100%;
+  stroke: var(--map-fg);
+  stroke-width: var(--map-stroke-width);
+}
+
+.svg-hover-map path {
+  fill: var(--map-fill);
+  transition: fill 300ms;
+}
+
+.svg-hover-map path.is-active {
+  fill: var(--map-fill-active);
+}
+
+.svg-hover-map-container__scroller {
+  border: 0.25rem solid var(--map-border);
+  inset-block-start: calc(var(--map-gap) * 2);
+  margin-block-end: calc(var(--map-gap) / 2);
+  overflow-y: auto;
+  position: sticky;
+}
+
+.svg-hover-map-container .svg-hover-map-container__scroller {
+  max-height: 14rem;
+}
+
+@media (min-width: 1000px) {
+  .svg-hover-map-container--portrait {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .svg-hover-map-container--portrait .svg-hover-map-container__scroller {
+    max-height: calc(100vh - 12rem);
+  }
+}
+
+.svg-hover-map-list {
+  background-color: var(--map-fill);
+  color: var(--map-fg);
+  column-gap: calc(var(--map-gap) / 2);
+
+  columns: 10em auto;
+  font-size: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: calc(var(--map-gap) / 2);
+}
+
+.svg-hover-map-list li::marker {
+  content: none;
+}
+
+.svg-hover-map-list [data-map] {
+  transition:
+    background-color,
+    color 300ms;
+}
+
+.svg-hover-map-list [data-map].is-active {
+  background-color: var(--map-fill-active);
+}

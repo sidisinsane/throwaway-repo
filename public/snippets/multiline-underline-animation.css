@@ -1,0 +1,45 @@
+.multiline-underline-animation {
+  --border-width: 1px;
+  --border-color: currentColor;
+  --background-position: 0% 100%;
+  --background-size: 0% var(--border-width);
+  --transition-property: background-size;
+  --transition-duration: 600ms;
+  background-image: linear-gradient(var(--border-color), var(--border-color));
+  background-position: var(--background-position);
+  background-repeat: no-repeat;
+  background-size: 0% var(--border-width);
+
+  color: currentColor;
+  text-decoration: none;
+  transition-duration: var(--transition-duration);
+  transition-property: var(--transition-property);
+}
+
+.multiline-underline-animation:where(
+    :lang(ar),
+    :lang(fa),
+    :lang(he),
+    :lang(id-Arab),
+    :lang(ks),
+    :lang(ml-Hebr),
+    :lang(ms-Arab),
+    :lang(or),
+    :lang(pa),
+    :lang(ta-Arab),
+    :lang(ug),
+    :lang(ur),
+    :lang(yi)
+  ) {
+  --background-position: 100% 100%;
+}
+
+.multiline-underline-animation:where(:hover, :focus) {
+  background-size: 100% var(--border-width);
+  outline: none;
+}
+
+.multiline-underline-animation--sync {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

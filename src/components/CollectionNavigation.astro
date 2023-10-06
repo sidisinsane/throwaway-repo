@@ -1,0 +1,185 @@
+---
+// astro
+import type { CollectionEntry } from "astro:content";
+// components
+import Icon from "./Icon.astro";
+import CollectionByline from "./CollectionByline.astro";
+import Debug from "./Debug.astro";
+
+// astro props
+interface Props {
+  collection: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+}
+const { collection } = Astro.props;
+---
+
+{
+  collection && (
+    <nav class="collection-navigation">
+      <ul class="collection-navigation__list">
+        {collection.map((entry) => (
+          <li class="collection-navigation__item">
+              <a
+                class="collection-navigation__link"
+                href={`/${entry.collection}/${entry.slug}`}
+                title={entry.data.title}
+              >
+                <h4 class="collection-navigation__title">
+                  {entry.collection == "snippets" && entry.data.codepenSlug && (
+                    <Icon name="codepen" />
+                  )}
+                  {entry.data.title}
+                </h4>
+
+                {entry.data.description && (
+                  <p class="collection-navigation__description">
+                    {entry.data.description}
+                  </p>
+                )}
+              </a>
+
+              <div class="collection-navigation__byline">
+                <CollectionByline entry={entry} />
+              </div>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<Debug item={collection} />
+
+<style>
+  .collection-navigation {
+    --width: 0;
+    --height: 0;
+    --x: 0;
+    --y: 0;
+    --background-color: var(--bg-deemphasized, #c5d0d2);
+    --color-active: var(--fg-emphasized, #000000);
+    --transition-property: all;
+    --transition-duration: 600ms;
+    --transition-timing-function: var(
+      --ease-elastic-1,
+      cubic-bezier(0.5, 0.75, 0.75, 1.25)
+    );
+    --item-padding: calc(var(--gap, 1.5rem) / 2);
+    --link-padding: calc(var(--gap, 1.5rem) / 4);
+    --scale: 1.04;
+    --opacity: 0.15;
+    --inner-gap: 0.5rem;
+
+    position: relative;
+  }
+
+  .collection-navigation {
+    color: var(--fg);
+    margin-block-start: calc(var(--item-padding) * -1);
+    margin-inline-start: calc(var(--link-padding) * -1);
+    max-width: 80ch;
+  }
+
+  .collection-navigation__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .collection-navigation__item {
+    margin: 0;
+    padding-block: var(--item-padding);
+    padding-inline: 0;
+  }
+
+  .collection-navigation__item::marker {
+    content: none;
+  }
+
+  .collection-navigation__item:hover
+    ~ .collection-navigation__item:last-child::before,
+  .collection-navigation__item:hover:last-child::before {
+    opacity: var(--opacity);
+    transform: scale(1);
+  }
+
+  .collection-navigation__item:last-child::before {
+    background-color: var(--background-color);
+    content: "";
+    display: block;
+    height: var(--height);
+    inset-block-start: var(--y);
+    inset-inline: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(var(--scale));
+    transition-duration: var(--transition-duration);
+    transition-property: var(--transition-property);
+    transition-timing-function: var(--transition-timing-function);
+    z-index: -1;
+  }
+
+  .collection-navigation__link {
+    color: currentColor;
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--link-padding);
+    padding-inline: var(--link-padding);
+    row-gap: var(--inner-gap);
+    text-decoration: none;
+  }
+
+  .collection-navigation__link:where(:hover, :focus) {
+    color: var(--color-active);
+    transition-duration: var(--transition-duration);
+    transition-property: var(--transition-property);
+    transition-timing-function: var(--transition-timing-function);
+  }
+
+  .collection-navigation__byline {
+    margin-inline-start: var(--link-padding);
+  }
+
+  .collection-navigation__title,
+  .collection-navigation__description {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .collection-navigation__title {
+    align-items: flex-start;
+    display: flex;
+    font-weight: 600;
+    gap: var(--inner-gap);
+  }
+
+  .collection-navigation__icon {
+    display: block;
+    height: 1.5rem;
+    width: auto;
+  }
+</style>
+
+<script>
+  const parents = document.querySelectorAll(".collection-navigation");
+
+  parents.forEach((parent) => {
+    const items = parent.querySelectorAll(".collection-navigation__item");
+
+    items.forEach((item) => {
+      item.addEventListener("mouseover", function () {
+        const link = item.querySelector(".collection-navigation__link");
+        const height = (link as HTMLElement).offsetHeight;
+        const top = (link as HTMLElement).offsetTop;
+
+        (parent as HTMLElement)?.style.setProperty("--height", `${height}px`);
+        (parent as HTMLElement)?.style.setProperty("--y", `${top}px`);
+      });
+    });
+  });
+</script>

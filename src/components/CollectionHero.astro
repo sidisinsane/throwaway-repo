@@ -1,0 +1,62 @@
+---
+// astro
+import type { CollectionEntry } from "astro:content";
+
+// components
+import CollectionTags from "./CollectionTags.astro";
+import CollectionAuthorBar from "./CollectionAuthorBar.astro";
+
+// env
+const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+
+// astro props
+interface Props {
+  collection: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+  authorSlug?: string;
+  isTag?: boolean;
+}
+const { collection, authorSlug = SITE_AUTHOR, isTag } = Astro.props;
+---
+
+<header class="hero">
+  <div class="hero__inner">
+    <slot />
+
+    {!isTag && <CollectionTags collection={collection} />}
+
+    {
+      !isTag && (
+        <div class="hero__about">
+          <CollectionAuthorBar authorSlug={authorSlug} />
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .hero {
+    display: grid;
+    place-content: center;
+    min-height: calc(100vh - var(--page-offset-block-start));
+    position: relative;
+    z-index: 1;
+  }
+
+  @supports (height: 100dvh) {
+    .hero {
+      min-height: calc(100dvh - var(--page-offset-block-start));
+    }
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(var(--gap) * 2);
+  }
+
+  .hero__about {
+    align-self: flex-end;
+  }
+</style>

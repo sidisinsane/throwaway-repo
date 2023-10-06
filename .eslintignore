@@ -1,0 +1,8 @@
+# generated types
+.astro/
+coverage/
+dist/
+docs/
+
+# 3rd party
+node_modules/

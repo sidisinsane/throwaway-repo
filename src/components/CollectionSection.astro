@@ -1,0 +1,81 @@
+---
+// astro
+import type { CollectionEntry } from "astro:content";
+
+// components
+import CollectionNavigation from "./CollectionNavigation.astro";
+import Icon from "./Icon.astro";
+
+// astro props
+interface Props {
+  title: string;
+  collection: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+  description?: string;
+  isTag?: boolean;
+}
+const { title, description, collection, isTag } = Astro.props;
+---
+
+<section class="section">
+  <div class="section__aside">
+    <header class="section__header">
+      <h2 class="section__title text-2xl-max text-lg-min">
+        {isTag && <Icon name="hashtag" />}
+        <span class="section__title-name">{title}</span>
+      </h2>
+      {description && <p class="section__description">{description}</p>}
+    </header>
+  </div>
+
+  <CollectionNavigation collection={collection} />
+</section>
+
+<style>
+  .section {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--gap, 1.5rem) * 2);
+    position: relative;
+  }
+
+  .section:not(:first-child) {
+    margin-block-start: calc(var(--gap, 1.5rem) * 2);
+  }
+
+  .section__header {
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      column-gap: calc(var(--gap, 1.5rem) * 2);
+    }
+
+    .section__aside {
+      grid-column: 1/2;
+    }
+
+    .section__header {
+      position: sticky;
+      inset-block-start: calc(var(--gap, 1.5rem) * 2);
+      margin: 0;
+    }
+  }
+
+  .section__title {
+    font-size: 3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+
+  .section__title-icon {
+    display: block;
+    height: 0.75em;
+    width: auto;
+    position: relative;
+    inset-block-start: 0.1em;
+  }
+</style>

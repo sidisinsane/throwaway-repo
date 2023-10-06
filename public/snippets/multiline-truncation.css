@@ -1,0 +1,60 @@
+/*---
+title: Multiline Truncation
+section: Snippets
+see: 
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
+---
+
+```example:html
+<div class="demo">
+  <h1>Multiline Truncation</h1>
+  
+  <div class="content">
+    <h2>1 Line</h2>
+    <p
+      class="truncate"
+      style="--truncate-lines: 1;">
+      Everyone charged with a penal offence has the right to be <strong>presumed innocent</strong> until proved guilty according to law in a public trial at which he has had all the guarantees necessary for his defence. No one shall be held guilty of any penal offence on account of any act or omission which did not constitute a penal offence, under national or international law, at the time when it was committed. Nor shall a heavier penalty be imposed than the one that was applicable at the time the penal offence was committed.
+    </p>
+  </div>
+
+  <div class="content">
+    <h2>2 Lines</h2>
+    <p
+      class="truncate"
+      style="--truncate-lines: 2;">
+      Everyone charged with a penal offence has the right to be <strong>presumed innocent</strong> until proved guilty according to law in a public trial at which he has had all the guarantees necessary for his defence. No one shall be held guilty of any penal offence on account of any act or omission which did not constitute a penal offence, under national or international law, at the time when it was committed. Nor shall a heavier penalty be imposed than the one that was applicable at the time the penal offence was committed.
+    </p>
+  </div>
+
+  <div class="content">
+    <h2>3 Lines</h2>
+    <p
+      class="truncate"
+      style="--truncate-lines: 3;">
+      Everyone charged with a penal offence has the right to be <strong>presumed innocent</strong> until proved guilty according to law in a public trial at which he has had all the guarantees necessary for his defence. No one shall be held guilty of any penal offence on account of any act or omission which did not constitute a penal offence, under national or international law, at the time when it was committed. Nor shall a heavier penalty be imposed than the one that was applicable at the time the penal offence was committed.
+    </p>
+  </div>
+
+  <div class="content">
+    <h2>4 Lines</h2>
+    <p
+      class="truncate"
+      style="--truncate-lines: 4;">
+      Everyone charged with a penal offence has the right to be <strong>presumed innocent</strong> until proved guilty according to law in a public trial at which he has had all the guarantees necessary for his defence. No one shall be held guilty of any penal offence on account of any act or omission which did not constitute a penal offence, under national or international law, at the time when it was committed. Nor shall a heavier penalty be imposed than the one that was applicable at the time the penal offence was committed.
+    </p>
+  </div>
+</div>
+```
+*/
+
+.truncate {
+  --truncate-lines: 3;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--truncate-lines);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

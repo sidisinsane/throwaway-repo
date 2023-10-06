@@ -1,0 +1,34 @@
+:root {
+  --page-scroll-progress-indicator-height: 0.25rem;
+  --page-scroll-progress-indicator-bg: var(--highlight, #e7b500);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--gutter, 1.5rem);
+}
+
+.page-scroll-progress-indicator {
+  background-color: var(--page-scroll-progress-indicator-bg);
+  display: block;
+  height: var(--page-scroll-progress-indicator-height);
+  inset-block-start: 0;
+  inset-inline: 0;
+  position: fixed;
+  transform-origin: 0 50%;
+  width: 100vw;
+  z-index: 100;
+  animation-timeline: scroll(root);
+  animation-duration: auto;
+  animation-name: page-scroll-progress-indicator;
+  animation-timing-function: linear;
+}
+
+@keyframes page-scroll-progress-indicator {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}

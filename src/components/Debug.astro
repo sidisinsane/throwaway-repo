@@ -1,0 +1,35 @@
+---
+interface Props {
+  item: any;
+  debug?: boolean;
+}
+
+const DEBUG = import.meta.env.DEBUG || false;
+const { item, debug = DEBUG } = Astro.props;
+---
+
+{
+  debug && (
+    <div class="debug">
+      {item == typeof "string" || item == typeof "number" ? (
+        <pre>{item}</pre>
+      ) : (
+        <pre>{JSON.stringify(item, null, 2)}</pre>
+      )}
+    </div>
+  )
+}
+
+<style>
+  .debug {
+    border: 0.5rem solid red;
+    box-sizing: border-box;
+    width: 100vw;
+    position: relative;
+    inset-inline: 50%;
+    margin-inline: -50vw;
+    margin-block-start: 1.5rem;
+    padding: 3rem;
+    overflow-x: auto;
+  }
+</style>

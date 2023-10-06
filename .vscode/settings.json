@@ -1,0 +1,31 @@
+{
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "prettier.configPath": ".prettierrc",
+  "prettier.documentSelectors": [
+    "**/*.astro",
+    "**/*.md",
+    "**/*.mdx",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.json",
+    "**/*.css"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false,
+    "source.sortImports": true,
+    "source.fixAll": true,
+    "source.fixAll.markdownlint": true
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "python.terminal.activateEnvironment": false,
+  "cSpell.enabled": false
+}

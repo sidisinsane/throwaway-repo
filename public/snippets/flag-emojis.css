@@ -1,0 +1,8 @@
+[data-cc] {
+  font-size: 1.5rem;
+  font-variant-emoji: emoji;
+}
+
+.emoji-one [data-cc] {
+  font-family: EmojiOne, sans-serif;
+}

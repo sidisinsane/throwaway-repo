@@ -1,0 +1,272 @@
+/*
+Colors
+---*/
+:root {
+  --black: #000000;
+  --white: #ffffff;
+
+  /* 
+  Color Palette inspired by Japanese Colors (https://twitter.com/nuevo_tokyo/status/1707592165533311043)
+  
+  Base: #47585c (Rust Grey aka Sabi Nezu)
+  Generator: https://www.tailwindshades.com/#color=191.42857142857144%2C12.883435582822084%2C31.960784313725487&step-up=8&step-down=11&hue-shift=0&name=river-bed&base-stop=7&v=1&overrides=e30%3D
+  ---*/
+  --river-bed-grey: #47585c;
+  --river-bed-grey-50: #d1d9db;
+  --river-bed-grey-100: #c5d0d2; /* Willow Grey (#c8d5bb) aka Yanagi Nezumi */
+  --river-bed-grey-200: #aebdc1;
+  --river-bed-grey-300: #97aaaf;
+  --river-bed-grey-400: #80989d;
+  --river-bed-grey-500: #6b848a;
+  --river-bed-grey-600: #596e73;
+  --river-bed-grey-700: #47585c; /* Rust Grey aka Sabi Nezu */
+  --river-bed-grey-800: #2f3a3c;
+  --river-bed-grey-900: #161b1d;
+  --river-bed-grey-950: #0a0c0d;
+
+  /*
+  Crimson Red based on ChatGPT suggestion
+  This deep, rich red creates a strong contrast with both the Rust Grey and Willow Grey. 
+  It adds warmth and vibrancy to your palette.
+
+  Base: #dc143c
+  Generator: https://www.tailwindshades.com/#color=348%2C83.33333333333334%2C47.05882352941176&step-up=8&step-down=11&hue-shift=0&name=crimson&base-stop=6&v=1&overrides=e30%3D
+  ---*/
+  --crimson-red: #dc143c;
+  --crimson-red-50: #fbd5dd;
+  --crimson-red-100: #fac3ce;
+  --crimson-red-200: #f69daf;
+  --crimson-red-300: #f37890;
+  --crimson-red-400: #ef5272;
+  --crimson-red-500: #ec2d53;
+  --crimson-red-600: #dc143c; /* default */
+  --crimson-red-700: #a90f2e;
+  --crimson-red-800: #750b20;
+  --crimson-red-900: #420612;
+  --crimson-red-950: #28040b;
+
+  /*
+  Terracotta Red based on ChatGPT suggestion
+  A slightly muted, earthy red, this color complements the Rust Grey while 
+  providing a harmonious balance.
+  
+  Base: #e2725b
+  Generator: https://www.tailwindshades.com/#color=10.222222222222225%2C69.9481865284974%2C62.15686274509804&step-up=8&step-down=11&hue-shift=0&name=terracotta&base-stop=4&v=1&overrides=e30%3D
+  ---*/
+  --terracotta-red: #e2725b;
+  --terracotta-red-50: #f7dad4;
+  --terracotta-red-100: #f4cbc3;
+  --terracotta-red-200: #eeaea0;
+  --terracotta-red-300: #e8907e;
+  --terracotta-red-400: #e2725b; /* default */
+  --terracotta-red-500: #da492b;
+  --terracotta-red-600: #ae371f;
+  --terracotta-red-700: #7e2816;
+  --terracotta-red-800: #4f190e;
+  --terracotta-red-900: #1f0a05;
+  --terracotta-red-950: #070201;
+
+  /*
+  Sunshine Yellow based on ChatGPT suggestion
+  This bright and cheerful yellow contrasts beautifully with the greys. 
+  It adds a pop of color and energy to your palette.
+
+  Base: #ffd700
+  Generator: https://www.tailwindshades.com/#color=50.588235294117645%2C100%2C50&step-up=8&step-down=11&hue-shift=0&name=gold&base-stop=5&v=1&overrides=e30%3D
+  ---*/
+  --gold-yellow: #ffd700;
+  --gold-yellow-50: #fff4b8;
+  --gold-yellow-100: #fff1a3;
+  --gold-yellow-200: #ffea7a;
+  --gold-yellow-300: #ffe452;
+  --gold-yellow-400: #ffdd29;
+  --gold-yellow-500: #ffd700;
+  --gold-yellow-600: #c7a800;
+  --gold-yellow-700: #8f7800;
+  --gold-yellow-800: #574900;
+  --gold-yellow-900: #1f1a00;
+  --gold-yellow-950: #030200;
+
+  /*
+  Mustard Yellow based on ChatGPT suggestion
+  A warmer, deeper yellow, mustard pairs well with both the greys 
+  and adds a sense of coziness and depth to your palette.
+
+  Base: #ffdb58
+  Generator: https://www.tailwindshades.com/#color=47.06586826347305%2C100%2C67.25490196078432&step-up=8&step-down=11&hue-shift=0&name=mustard&base-stop=4&v=1&overrides=e30%3D
+  ---*/
+  --mustard-yellow: #ffdb58;
+  --mustard-yellow-50: #fffae7;
+  --mustard-yellow-100: #fff5d2;
+  --mustard-yellow-200: #ffedaa;
+  --mustard-yellow-300: #ffe481;
+  --mustard-yellow-400: #ffdb58; /* default */
+  --mustard-yellow-500: #ffcf20;
+  --mustard-yellow-600: #e7b500;
+  --mustard-yellow-700: #af8900;
+  --mustard-yellow-800: #775d00;
+  --mustard-yellow-900: #3f3100;
+  --mustard-yellow-950: #221b00;
+
+  /*
+  Color scheme
+  ---*/
+  --bg: var(--river-bed-grey-100);
+  --bg-deemphasized: var(--white);
+  --bg-emphasized: var(--river-bed-grey-500);
+
+  --fg: var(--river-bed-grey-700);
+  --fg-deemphasized: var(--river-bed-grey-400);
+  --fg-emphasized: var(--river-bed-grey-950);
+
+  --fg-rgb: 71, 88, 92;
+  --fg-hsl: 191, 13%, 32%;
+
+  --highlight: var(--mustard-yellow-600);
+  --highlight-deemphasized: var(--mustard-yellow-400);
+  --highlight-emphasized: var(--mustard-yellow-900);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--river-bed-grey-700);
+    --bg-deemphasized: var(--river-bed-grey-600);
+    --bg-emphasized: var(--river-bed-grey-950);
+
+    --fg: var(--river-bed-grey-100);
+    --fg-emphasized: var(--white);
+    --fg-deemphasized: var(--river-bed-grey-300);
+
+    --fg-rgb: 197, 208, 210;
+    --fg-hsl: 189, 13%, 80%;
+
+    --highlight: var(--mustard-yellow-400);
+    --highlight-deemphasized: var(--mustard-yellow-200);
+    --highlight-emphasized: var(--mustard-yellow-700);
+  }
+}
+
+html.dark {
+  --bg: var(--river-bed-grey-700);
+  --bg-deemphasized: var(--river-bed-grey-600);
+  --bg-emphasized: var(--river-bed-grey-950);
+
+  --fg: var(--river-bed-grey-100);
+  --fg-emphasized: var(--white);
+  --fg-deemphasized: var(--river-bed-grey-300);
+
+  --fg-rgb: 197, 208, 210;
+  --fg-hsl: 189, 13%, 80%;
+
+  --highlight: var(--mustard-yellow-400);
+  --highlight-deemphasized: var(--mustard-yellow-200);
+  --highlight-emphasized: var(--mustard-yellow-700);
+}
+
+html.light {
+  --bg: var(--river-bed-grey-100);
+  --bg-deemphasized: var(--river-bed-grey-50);
+  --bg-emphasized: var(--river-bed-grey-500);
+
+  --fg: var(--river-bed-grey-700);
+  --fg-deemphasized: var(--river-bed-grey-400);
+  --fg-emphasized: var(--river-bed-grey-950);
+
+  --fg-rgb: 71, 88, 92;
+  --fg-hsl: 191, 13%, 32%;
+
+  --highlight: var(--mustard-yellow-600);
+  --highlight-deemphasized: var(--mustard-yellow-400);
+  --highlight-emphasized: var(--mustard-yellow-900);
+}
+
+/*
+Layout
+---*/
+:root {
+  --max-width: 1000px;
+
+  --container-min: 320;
+  --container-max: 1000;
+  --viewport-min: 320;
+  --viewport-max: 2400;
+
+  --gap: 1.5rem;
+  --gutter: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gap: 3rem;
+  }
+}
+
+/*
+Animations & Transitions
+---*/
+:root {
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-1: cubic-bezier(0.25, 0, 0.5, 1);
+  --ease-2: cubic-bezier(0.25, 0, 0.4, 1);
+  --ease-3: cubic-bezier(0.25, 0, 0.3, 1);
+  --ease-4: cubic-bezier(0.25, 0, 0.2, 1);
+  --ease-5: cubic-bezier(0.25, 0, 0.1, 1);
+
+  --ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-in-1: cubic-bezier(0.25, 0, 1, 1);
+  --ease-in-2: cubic-bezier(0.5, 0, 1, 1);
+  --ease-in-3: cubic-bezier(0.7, 0, 1, 1);
+  --ease-in-4: cubic-bezier(0.9, 0, 1, 1);
+  --ease-in-5: cubic-bezier(1, 0, 1, 1);
+
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-out-1: cubic-bezier(0, 0, 0.75, 1);
+  --ease-out-2: cubic-bezier(0, 0, 0.5, 1);
+  --ease-out-3: cubic-bezier(0, 0, 0.3, 1);
+  --ease-out-4: cubic-bezier(0, 0, 0.1, 1);
+  --ease-out-5: cubic-bezier(0, 0, 0, 1);
+
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-in-out-1: cubic-bezier(0.1, 0, 0.9, 1);
+  --ease-in-out-2: cubic-bezier(0.3, 0, 0.7, 1);
+  --ease-in-out-3: cubic-bezier(0.5, 0, 0.5, 1);
+  --ease-in-out-4: cubic-bezier(0.7, 0, 0.3, 1);
+  --ease-in-out-5: cubic-bezier(0.9, 0, 0.1, 1);
+
+  --ease-elastic-1: cubic-bezier(0.5, 0.75, 0.75, 1.25);
+  --ease-elastic-2: cubic-bezier(0.5, 1, 0.75, 1.25);
+  --ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+  --ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
+  --ease-elastic-5: cubic-bezier(0.5, 1.75, 0.75, 1.25);
+
+  --ease-squish-1: cubic-bezier(0.5, -0.1, 0.1, 1.5);
+  --ease-squish-2: cubic-bezier(0.5, -0.3, 0.1, 1.5);
+  --ease-squish-3: cubic-bezier(0.5, -0.5, 0.1, 1.5);
+  --ease-squish-4: cubic-bezier(0.5, -0.7, 0.1, 1.5);
+  --ease-squish-5: cubic-bezier(0.5, -0.9, 0.1, 1.5);
+
+  --ease-step-1: steps(2);
+  --ease-step-2: steps(3);
+  --ease-step-3: steps(4);
+  --ease-step-4: steps(7);
+  --ease-step-5: steps(10);
+}
+
+/* Typography */
+:root {
+  /* typographic scales */
+  --minor-second: 1.067;
+  --major-second: 1.125;
+  --minor-third: 1.2;
+  --major-third: 1.25;
+  --perfect-fourth: 1.333;
+  --augmented-fourth: 1.414;
+  --perfect-fifth: 1.5;
+  --golden-ratio: 1.618;
+
+  --min-type-size: 12;
+  --max-type-size: 18;
+
+  --type-base: 16;
+  --type-scale: var(--perfect-fifth);
+}

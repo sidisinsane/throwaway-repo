@@ -1,0 +1,101 @@
+---
+// astro
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+// components
+import SocialLink from "./SocialLink.astro";
+import Debug from "./Debug.astro";
+
+// env
+const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+
+// astro props
+interface Props {
+  authorSlug?: string;
+}
+const { authorSlug = SITE_AUTHOR } = Astro.props;
+
+// do stuff
+// 1. Get single entry from given author
+const collectionAuthor = (await getEntry(
+  "authors",
+  authorSlug,
+)) as CollectionEntry<"authors">;
+
+// 2. Filter all non-linkable entries from profile data
+const social = Object.fromEntries(
+  Object.entries(collectionAuthor?.data).filter(
+    ([key]) => !["isDraft", "name", "alias"].includes(key),
+  ),
+);
+const socialCount = Object.entries(social).length as number;
+
+const linksCountChar = "·";
+const linksCount = linksCountChar.repeat(socialCount);
+---
+
+<div class="social" style=`--links-count: "${linksCount}";`>
+  <nav class="social__navigation">
+    {
+      Object.keys(social).filter(key => key !== "email").map((service) => (
+        <SocialLink
+          service={service}
+          alias={social[service] as string}
+        />
+      ))
+    }
+  </nav>
+
+  {
+    collectionAuthor?.data["email"] && (
+      <p class="email">{collectionAuthor?.data["email"]}</p>
+    )
+  }
+</div>
+
+<Debug item={social} />
+
+<style>
+  .social {
+    --links-count: "·";
+
+    color: var(--fg);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: calc(var(--gap) / 3);
+    row-gap: calc(var(--gap) / 4);
+  }
+
+  .social__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: calc(var(--gap) / 3);
+  }
+
+  .social__navigation::before {
+    content: var(--links-count);
+  }
+
+  a {
+    display: flex;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: calc(var(--gap) / 6);
+    width: 1.4rem;
+    transition: color 0.2s var(--ease-1);
+  }
+
+  a:hover {
+    color: var(--fg-emphasized);
+  }
+
+  svg {
+    display: block;
+    width: 1.4rem;
+    height: auto;
+  }
+</style>

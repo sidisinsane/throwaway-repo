@@ -1,0 +1,418 @@
+/*
+  I18N QUOTATION MARKS
+
+  REFERENCES
+  Quotation marks in Unicode (Character property "Quotation_Mark"=Yes)
+    https://en.wikipedia.org/wiki/Quotation_mark#Unicode_code_point_table
+  Quotation marks in Chinese, Japanese, and Korean (CJK)
+    https://en.wikipedia.org/wiki/Quotation_mark#Unicode_code_point_table
+  Unicode Character Database
+    https://www.unicode.org/Public/UCD/latest/ucd/PropList.txt
+  Unicode® Standard Annex #44 UNICODE CHARACTER DATABASE
+    https://www.unicode.org/reports/tr44/
+  Quoting in HTML: Quotations, Citations, and Blockquotes
+    https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/
+  Unicode-Compart
+    https://www.compart.com/en/unicode/
+  -------------------------------------------------------------------------------------------------
+
+  Quotation marks in Unicode (Character property "Quotation_Mark"=Yes)
+
+  0022          ; Quotation_Mark # Po       QUOTATION MARK
+  0027          ; Quotation_Mark # Po       APOSTROPHE
+  00AB          ; Quotation_Mark # Pi       LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+  00BB          ; Quotation_Mark # Pf       RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+  2018          ; Quotation_Mark # Pi       LEFT SINGLE QUOTATION MARK
+  2019          ; Quotation_Mark # Pf       RIGHT SINGLE QUOTATION MARK
+  201A          ; Quotation_Mark # Ps       SINGLE LOW-9 QUOTATION MARK
+  201B..201C    ; Quotation_Mark # Pi   [2] SINGLE HIGH-REVERSED-9 QUOTATION MARK..LEFT DOUBLE[...]
+  201D          ; Quotation_Mark # Pf       RIGHT DOUBLE QUOTATION MARK
+  201E          ; Quotation_Mark # Ps       DOUBLE LOW-9 QUOTATION MARK
+  201F          ; Quotation_Mark # Pi       DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+  2039          ; Quotation_Mark # Pi       SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+  203A          ; Quotation_Mark # Pf       SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+  2E42          ; Quotation_Mark # Ps       DOUBLE LOW-REVERSED-9 QUOTATION MARK
+  -------------------------------------------------------------------------------------------------
+
+  Quotation marks in Chinese, Japanese, and Korean (CJK)
+
+  300C          ; Quotation_Mark # Ps       LEFT CORNER BRACKET
+  300D          ; Quotation_Mark # Pe       RIGHT CORNER BRACKET
+  300E          ; Quotation_Mark # Ps       LEFT WHITE CORNER BRACKET
+  300F          ; Quotation_Mark # Pe       RIGHT WHITE CORNER BRACKET
+  301D          ; Quotation_Mark # Ps       REVERSED DOUBLE PRIME QUOTATION MARK
+  301E..301F    ; Quotation_Mark # Pe   [2] DOUBLE PRIME QUOTATION MARK..LOW DOUBLE PRIME[...]
+
+  Relevant General Category Values
+
+  # Pe:	Close_Punctuation	a closing punctuation mark (of a pair)
+  # Pf:	Final_Punctuation	a final quotation mark
+  # Pi:	Initial_Punctuation	an initial quotation mark
+  # Po:	Other_Punctuation	a punctuation mark of other type
+  # Ps:	Open_Punctuation	an opening punctuation mark (of a pair)
+
+  Relevant Code Point Ranges
+
+  - A range of code points is specified by the form "X..Y".
+  - Each code point in a range has the associated property value specified on a data file. 
+    For example (from Blocks.txt):
+    0000..007F; Basic Latin
+    0080..00FF; Latin-1 Supplement
+*/
+
+/*
+Legend
+------------------------------------------------------------------------------------------------
+
+| Shortname     | Char     | Unicode       | Name                                          |
+| ------------- | -------- | ------------- | --------------------------------------------- |
+| LDA           | [«]      | U+00AB        | Left-Pointing Double Angle Quotation Mark     |
+| LDA+SPACE     | [« ]     | U+00AB U+2005 | Hybrid                                        |
+| RDA           | [»]      | U+00BB        | Right-Pointing Double Angle Quotation Mark    |
+| SPACE         | [ ]      | U+2005        | Four-Per-Em Space                             |
+| SPACE+RDA     | [ »]     | U+2005 U+00BB | Hybrid                                        |
+| SL9           | [‚]      | U+201A        | Single Low-9 Quotation Mark                   |
+| LD            | [“]      | U+201C        | Left Double Quotation Mark                    |
+| RD            | [”]      | U+201D        | Right Double Quotation Mark                   |
+| DL9           | [„]      | U+201E        | Double Low-9 Quotation Mark                   |
+| LS            | [‘]      | U+2018        | Left Single Quotation Mark                    |
+| RS            | [’]      | U+2019        | Right Single Quotation Mark                   |
+| SRA           | [›]      | U+203A        | Single Right-Pointing Angle Quotation Mark    |
+| SLA           | [‹]      | U+2039        | Single Left-Pointing Angle Quotation Mark     |
+| LCB           | [「]     | U+300C        | Left Corner Bracket                           |
+| RCB           | [」]     | U+300D        | Right Corner Bracket                          |
+| LWCB          | [『]     | U+300E        | Left White Corner Bracket                     |
+| RWCB          | [』]     | U+300F        | Right White Corner Bracket                    |
+| LU            | [lu ]    | ?             | ?                                             |
+| LIU           | [ li'u]  | ?             | ?                                             |
+
+*/
+
+/*
+  DEFAULTS (LD RD LS RS)
+  -------------------------------------------------------------------------------------------------
+
+Afrikaans (af)
+Arabic (ar)
+Basque (eu)
+Chinese (zh)
+Chinese, simplified (zh-Hans)
+Czech (cs)
+Dutch (nl)
+---
+English (en)
+English, British (en-GB)
+English, Canada (en-CA)
+English, US (en-US)
+
+@source: https://en.wikipedia.org/wiki/Quotation_marks_in_English#Typing_quotation_marks_on_a_computer_keyboard
+---
+Esperanto (eo)
+Filipino (fil)
+Finnish (fi)
+Indonesian (id)
+Interlingua (ia)
+Irish/Gaelic (ga)
+Korean (ko)
+Portuguese, Brazil (pt-BR)
+Thai (th)
+Turkish (tr)
+*/
+q,
+blockquote {
+  quotes: "“" "”" "‘" "’";
+}
+
+/**
+LDA RDA SLA SRA
+ *
+@todo: Verify!
+------------------------------------------------------------------------------------------------
+
+Armenian (hy)
+Azerbaijani (az)
+Belarusian (be)
+Catalan (ca)
+French, Switzerland (fr-CH)
+German, Switzerland (de-CH)
+Italian, Switzerland (it-CH)
+ */
+*:where(
+    :lang(hy),
+    :lang(az),
+    :lang(be),
+    :lang(ca),
+    :lang(fr-CH),
+    :lang(de-CH),
+    :lang(it-CH)
+  )
+  q,
+*:where(
+    :lang(hy),
+    :lang(az),
+    :lang(be),
+    :lang(ca),
+    :lang(fr-CH),
+    :lang(de-CH),
+    :lang(it-CH)
+  )
+  blockquote {
+  quotes: "«" "»" "‹" "›";
+}
+
+/**
+RDA LDA DL9 LD
+ *
+@todo: Verify!
+------------------------------------------------------------------------------------------------
+
+Danish (da)
+ */
+:where(:lang(da)) q,
+:where(:lang(da)) blockquote {
+  quotes: "»" "«" "„" "“";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LDA+SPACE SPACE+RDA SLA SRA
+
+French (fr)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(fr)) q,
+:where(:lang(fr)) blockquote {
+  quotes: "« " " »" "‹" "›";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 LD LS RS
+
+Albanian (sq)
+Bulgarian (bg)
+Croatian (cr)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(sg), :lang(bg), :lang(cr)) q,
+:where(:lang(sg), :lang(bg), :lang(cr)) blockquote {
+  quotes: "„" "“" "‘" "’";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 LD
+
+Estonian (et)
+Georgian (ka)
+Lithuanian (lt)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(et), :lang(ka), :lang(lt)) q,
+:where(:lang(et), :lang(ka), :lang(lt)) blockquote {
+  quotes: "„" "“";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LD RD SL9 RS
+
+German (de)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(de)) q,
+:where(:lang(de)) blockquote {
+  quotes: "“" "”" "‚" "’";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LCB RCB LWCB RWCB
+
+Japanese (ja)
+Chinese, traditional (zh-Hant)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(ja), :lang(zh-Hant)) q,
+:where(:lang(ja), :lang(zh-Hant)) blockquote {
+  quotes: "「" "」" "『" "』";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LDA RDA LD RD
+
+Greek (el)
+Spanish (es)
+Italian (it)
+Portuguese (pt)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(el), :lang(es), :lang(it), :lang(pt)) q,
+:where(:lang(el), :lang(es), :lang(it), :lang(pt)) blockquote {
+  quotes: "«" "»" "“" "”";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 RD RS SL9
+
+Hebrew (he, iw)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(he), :lang(iw)) q,
+:where(:lang(he), :lang(iw)) blockquote {
+  quotes: "„" "”" "’" "‚";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 RD RDA LDA
+
+Hungarian (hu)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(hu)) q,
+:where(:lang(hu)) blockquote {
+  quotes: "„" "”" "»" "«";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo What is this? Verify or remove!
+
+LU LIU
+
+Lojban (jbo)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(jbo)) q,
+:where(:lang(jbo)) blockquote {
+  quotes: "lu " " li'u";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 LD RS LS
+
+Macedonian (mk)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(mk)) q,
+:where(:lang(mk)) blockquote {
+  quotes: "„" "“" "’" "‘";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LDA RDA LS LS
+
+Norwegian (no)
+Norwegian, Bokmål (nb)
+Norwegian, Nynorsk (nn)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(no), :lang(nb), :lang(nn)) q,
+:where(:lang(no), :lang(nb), :lang(nn)) blockquote {
+  quotes: "«" "»" "‘" "‘";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LDA RDA
+
+Persian (fa)
+Ukrainian (uk)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(fa), :lang(uk)) q,
+:where(:lang(fa), :lang(uk)) blockquote {
+  quotes: "«" "»";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 RD LDA RDA
+
+Polish (pl)
+Romanian (ro)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(pl), :lang(ro)) q,
+:where(:lang(pl), :lang(ro)) blockquote {
+  quotes: "„" "”" "«" "»";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LDA RDA DL9 LD
+
+Latvian (lv)
+Russian (ru)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(lv), :lang(ru)) q,
+:where(:lang(lv), :lang(ru)) blockquote {
+  quotes: "«" "»" "„" "“";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 RD RS RS
+
+Serbian (sr)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(sr)) q,
+:where(:lang(sr)) blockquote {
+  quotes: "„" "”" "’" "’";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+DL9 LD SL9 LS
+
+Icelandic (is)
+Slovak (sk)
+Slovene (sl)
+Sorbian (sb)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(is), :lang(sk), :lang(sl), :lang(sb)) q,
+:where(:lang(is), :lang(sk), :lang(sl), :lang(sb)) blockquote {
+  quotes: "„" "“" "‚" "‘";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+RD RD RS RS
+
+Swedish (sv)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(sv)) q,
+:where(:lang(sv)) blockquote {
+  quotes: "”" "”" "’" "’";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LD RD
+
+Vietnamese (vi)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(vi)) q,
+:where(:lang(vi)) blockquote {
+  quotes: "“" "”";
+}
+
+/* ------------------------------------------------------------------------------------------------
+@todo: Verify!
+
+LS RS LD RD
+
+Welsh (cy)
+------------------------------------------------------------------------------------------------ */
+:where(:lang(cy)) q,
+:where(:lang(cy)) blockquote {
+  quotes: "‘" "’" "“" "”";
+}

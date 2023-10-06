@@ -1,0 +1,8 @@
+{
+  "extends": "markdownlint/style/prettier",
+  "first-line-h1": false,
+  "sentences-per-line": true,
+  "ignore_code_blocks": true,
+  "MD013": false,
+  "MD033": false
+}

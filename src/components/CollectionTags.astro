@@ -1,0 +1,110 @@
+---
+// astro
+import type { CollectionEntry } from "astro:content";
+
+// astro props
+interface Props {
+  collection: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+}
+const { collection } = Astro.props;
+
+// do stuff
+const tags = [...new Set(collection.map((entry) => entry.data.tags).flat())];
+tags.sort();
+---
+
+<nav class="tags">
+  {
+    tags.map((tag) => (
+      <a class="tags__link" href={`/tags/${tag}`} title="">
+        {`${tag}`}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: calc(var(--gap) / 3);
+    row-gap: calc(var(--gap) / 3);
+
+    font-size: 2.625rem;
+    line-height: 1.15;
+    text-wrap: balance;
+
+    margin-bottom: 3rem;
+  }
+
+  .tags__link {
+    color: var(--fg);
+    background-color: var(--bg-deemphasized);
+    border: 1px solid var(--fg);
+    text-decoration: none;
+    display: block;
+    padding-inline: 0.125em;
+  }
+
+  .tags__link:hover {
+    outline: none;
+    color: var(--bg);
+    background-color: transparent;
+    border-color: transparent;
+    transition: all 0.5s var(--ease-elastic-1);
+  }
+</style>
+<style>
+  .tags {
+    --width: 0;
+    --height: 0;
+    --y: 0;
+
+    position: relative;
+  }
+
+  .tags__link:hover ~ .tags__link:last-child::before,
+  .tags__link:hover:last-child::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .tags__link:last-child::before {
+    background-color: var(--fg);
+    opacity: 0;
+    content: "";
+    display: block;
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    margin: 0;
+    transform: scale(1.04);
+    transition: all 0.5s var(--ease-elastic-1);
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>
+
+<script>
+  const parents = document.querySelectorAll(".tags");
+
+  parents.forEach((parent) => {
+    const items = parent.querySelectorAll("a");
+
+    items.forEach((item) => {
+      item.addEventListener("mouseover", function () {
+        const height = (item as HTMLElement).offsetHeight;
+        const width = (item as HTMLElement).offsetWidth;
+        const top = (item as HTMLElement).offsetTop;
+        const left = (item as HTMLElement).offsetLeft;
+
+        (parent as HTMLElement)?.style.setProperty("--width", `${width}px`);
+        (parent as HTMLElement)?.style.setProperty("--height", `${height}px`);
+        (parent as HTMLElement)?.style.setProperty("--y", `${top}px`);
+        (parent as HTMLElement)?.style.setProperty("--x", `${left}px`);
+      });
+    });
+  });
+</script>

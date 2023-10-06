@@ -1,0 +1,217 @@
+/*--
+title: Signage
+section: Snippets
+see: 
+  - https://ludvikherrera.myportfolio.com/dakota-business-college-signage
+---
+
+```example:html
+<div class="signage-container">
+  <div class="signage" itemscope itemtype="https://schema.org/Organization">
+    <figure class="signage__figure">
+      <svg aria-hidden="true" itemprop="logo" width="500" height="313" viewBox="0 0 500 313" fill="currentColor">
+        <use xlink:href="#logo-dunder-mifflin"></use>
+      </svg>
+      <figcaption>Dunder Mifflin</figcaption>
+    </figure>
+    <div class="signage__section">
+      <div class="signage__main">
+        <header class="signage__header">
+          <h2 class="name" itemprop="name">Dunder Mifflin, Inc</h2>
+        </header>
+        <div class="signage__info">
+          <span itemprop="naics" content="424110">Paper company</span>
+          <a class="telephone" itemprop="telephone" href="tel:+15705555026" content="+15705555026" title="">(570) 555-5026</a>
+        </div>
+      </div>
+      <div class="signage__aside" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <span class="orientation up">
+          <span class="street-address" itemprop="streetAddress">Suite 200</span>
+          <svg role="img" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <title>orientation up</title>
+            <use xlink:href="#icon-up"></use>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+
+.signage-container {
+  container-name: signage-container;
+  container-type: inline-size;
+  display: grid;
+  width: 100%;
+}
+
+.signage {
+  --outer-gap: 1rem;
+  --inner-gap: calc(var(--outer-gap) / 4);
+
+  background-color: var(--fg, #333333);
+  column-gap: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(6rem, 9rem) auto;
+  padding: var(--outer-gap);
+  row-gap: var(--outer-gap);
+}
+
+.signage__figure,
+.signage__section {
+  align-items: center;
+  background-color: var(--bg, #ffffff);
+  color: var(--fg, #333333);
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 0;
+  padding: var(--outer-gap);
+  text-align: center;
+}
+
+.signage__figure {
+  gap: var(--inner-gap);
+  grid-row-start: 1;
+  justify-content: start;
+}
+
+.signage__section {
+  gap: var(--outer-gap);
+  grid-row-start: 2;
+  justify-content: flex-start;
+}
+
+.signage__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  font-size: 1.25rem;
+  gap: var(--outer-gap);
+}
+
+.signage__aside {
+  align-self: center;
+}
+
+.signage__info {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+@container signage-container (min-width: 768px) {
+  .signage {
+    --outer-gap: 1.5rem;
+
+    column-gap: var(--outer-gap);
+    display: grid;
+    grid-template-columns: minmax(4rem, 1fr) 3fr;
+    grid-template-rows: 1fr;
+    min-height: 275px;
+    row-gap: 0;
+  }
+
+  .signage__figure,
+  .signage__section {
+    grid-row-start: 1;
+  }
+
+  .signage__figure {
+    grid-column-start: 1;
+  }
+
+  .signage__section {
+    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    grid-column-start: 2;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  .signage__aside {
+    align-self: flex-start;
+  }
+}
+
+.signage__figure svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.signage__figure figcaption {
+  font-size: 0.875rem;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.signage__header .name {
+  flex: 1;
+  font-size: 2.5rem;
+  inset-block-start: -0.125em;
+  line-height: 1;
+  margin: 0;
+  position: relative;
+}
+
+.signage__info .telephone {
+  color: inherit;
+}
+
+@container signage-container (min-width: 768px) {
+  .signage__figure svg {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.orientation {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+}
+
+.orientation:where(.left, .right) {
+  column-gap: 0.25rem;
+}
+
+.orientation:where(.left, .up-left, .down-left) .street-address,
+.orientation:where(.right, .up-right, .down-right) svg {
+  grid-column-start: 1;
+  justify-self: end;
+  text-align: end;
+}
+
+.orientation:where(.right, .up-right, .down-right) .street-address,
+.orientation:where(.left, .up-left, .down-left) svg {
+  grid-column-start: 2;
+  justify-self: start;
+  text-align: start;
+}
+
+.orientation:where(.up, .down) .street-address,
+.orientation:where(.up, .down) svg {
+  grid-column: 1 / -1;
+  justify-self: center;
+  text-align: center;
+}
+
+.orientation:where(.left, .right, .up, .up-left, .up-right) .street-address,
+.orientation:where(.left, .right, .down, .down-left, .down-right) svg {
+  grid-row-start: 1;
+}
+
+.orientation:where(.down, .down-left, .down-right) .street-address,
+.orientation:where(.up, .up-left, .up-right) svg {
+  grid-row-start: 2;
+}
+
+.orientation:where(.left, .right) .street-address,
+.orientation:where(.left, .right) svg {
+  align-self: center;
+}

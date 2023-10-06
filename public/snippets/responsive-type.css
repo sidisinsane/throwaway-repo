@@ -1,0 +1,149 @@
+/*---
+title: Responsive Type
+section: Snippets
+see: 
+  - https://tobiasahlin.com/blog/responsive-fluid-css-type-scales/
+---
+
+```example:html
+<div class="container-adaptive">
+  <h1 class="text-xl-min text-5xl-max">Whereas recognition of the inherent dignity</h1>
+  <h2 class="text-lg-min text-4xl-max">Whereas recognition of the inherent dignity</h2>
+  <h3 class="text-base-min text-3xl-max">Whereas recognition of the inherent dignity</h3>
+  <h4 class="text-sm-min text-2xl-max">Whereas recognition of the inherent dignity</h4>
+</div>
+```
+
+*/
+:root {
+  --min-size: 12;
+  --max-size: 18;
+  --container-min: 320;
+  --container-max: 2400;
+  --viewport-min: 320;
+  --viewport-max: 2400;
+
+  /* typographic scales */
+  --minor-second: 1.067;
+  --major-second: 1.125;
+  --minor-third: 1.2;
+  --major-third: 1.25;
+  --perfect-fourth: 1.333;
+  --augmented-fourth: 1.414;
+  --perfect-fifth: 1.5;
+  --golden-ratio: 1.618;
+
+  --type-base: 16;
+  --type-scale: var(--perfect-fifth);
+}
+
+.container-adaptive {
+  container-type: inline-size;
+}
+
+/* Setup size calculation for all max utilities */
+.text-5xl-max,
+.text-4xl-max,
+.text-3xl-max,
+.text-2xl-max,
+.text-xl-max,
+.text-lg-max,
+.text-base-max,
+.text-sm-max {
+  --font-size: calc(
+    var(--min-size) * 1px + (var(--max-size) - var(--min-size)) *
+      (100cqw - var(--container-min) * 1px) /
+      (var(--container-max) - var(--container-min))
+  );
+  font-size: clamp(
+    var(--min-size) * 1px,
+    var(--font-size),
+    var(--max-size) * 1px
+  );
+}
+
+.text-5xl-max {
+  --max-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-4xl-max {
+  --max-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-3xl-max {
+  --max-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale)
+  );
+}
+
+.text-2xl-max {
+  --max-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-xl-max {
+  --max-size: calc(var(--type-base) * var(--type-scale) * var(--type-scale));
+}
+
+.text-lg-max {
+  --max-size: calc(var(--type-base) * var(--type-scale));
+}
+
+.text-base-max {
+  --max-size: var(--type-base);
+}
+
+.text-sm-max {
+  --max-size: calc(var(--type-base) / var(--type-scale));
+}
+
+.text-5xl-min {
+  --min-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-4xl-min {
+  --min-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-3xl-min {
+  --min-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale)
+  );
+}
+
+.text-2xl-min {
+  --min-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-xl-min {
+  --min-size: calc(var(--type-base) * var(--type-scale) * var(--type-scale));
+}
+
+.text-lg-min {
+  --min-size: calc(var(--type-base) * var(--type-scale));
+}
+
+.text-base-min {
+  --min-size: var(--type-base);
+}
+
+.text-sm-min {
+  --min-size: calc(var(--type-base) / var(--type-scale));
+}

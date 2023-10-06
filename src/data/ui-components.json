@@ -1,0 +1,292 @@
+[
+  {
+    "name": "Accordion",
+    "description": "An accordion is a vertical stack of interactive headings used to toggle the display of further information; each item can be 'collapsed' with just a short label visible or 'expanded' to show the full content.",
+    "aliases": [
+      "Arrow toggle",
+      "Collapse",
+      "Collapsible sections",
+      "Collapsible",
+      "Details",
+      "Disclosure",
+      "Expandable",
+      "Expander",
+      "ShowyHideyThing"
+    ]
+  },
+  {
+    "name": "Alert",
+    "description": "A way of informing the user of important changes in a prominent way.",
+    "aliases": ["Notification", "Feedback", "Message", "Banner"]
+  },
+  {
+    "name": "Avatar",
+    "description": "A graphical representation of a user: usually a photo, illustration, or initial.",
+    "aliases": []
+  },
+  {
+    "name": "Badge",
+    "description": "A small label, generally appearing inside or in close proximity to another larger interface component, representing a status, property, or some other metadata.",
+    "aliases": ["Tag", "Label", "Chip"]
+  },
+  {
+    "name": "Breadcrumbs",
+    "description": "A list of links showing the location of the current page in the navigational hierarchy.",
+    "aliases": ["Breadcrumb trail"]
+  },
+  {
+    "name": "Button",
+    "description": "Buttons trigger an action such as submitting a form or showing/hiding an interface component.",
+    "aliases": []
+  },
+  {
+    "name": "Button group",
+    "description": "A wrapper for multiple, related buttons.",
+    "aliases": ["Toolbar"]
+  },
+  {
+    "name": "Card",
+    "description": "A container for content representing a single entity. e.g. a contact, article, or task.",
+    "aliases": []
+  },
+  {
+    "name": "Checkbox",
+    "description": "An input for choosing from predefined options: \n\nwhen used alone, it gives a binary choice (checked/unchecked); \nin a group it allows the user to select multiple values from a list of options.",
+    "aliases": []
+  },
+  {
+    "name": "Color picker",
+    "description": "An input for choosing a color.",
+    "aliases": []
+  },
+  {
+    "name": "Combobox",
+    "description": "An input that behaves similarly to a select, with the addition of a free text input to filter options.",
+    "aliases": ["Autocomplete", "Autosuggest"]
+  },
+  {
+    "name": "Date input",
+    "description": "A means of inputting a date \u2013 often separated into multiple individual fields for day/month/year.",
+    "aliases": []
+  },
+  {
+    "name": "Datepicker",
+    "description": "A visual way to choose a date using a calendar view.",
+    "aliases": ["Calendar", "Datetime picker"]
+  },
+  {
+    "name": "Drawer",
+    "description": "A panel which slides out from the edge of the screen.",
+    "aliases": ["Tray", "Flyout"]
+  },
+  {
+    "name": "Dropdown menu",
+    "description": "A menu in which options are hidden by default but can be shown by interacting with a button; it differs from a select in that it shows actions or navigation options and is not a form input.",
+    "aliases": ["Select menu"]
+  },
+  {
+    "name": "Empty state",
+    "description": "An indication to the user that there is no data to display in the current view; it often includes an alternative action (e.g. try a different search term).",
+    "aliases": []
+  },
+  {
+    "name": "Fieldset",
+    "description": "A wrapper for related form fields.",
+    "aliases": []
+  },
+  {
+    "name": "File",
+    "description": "A representation of a file such as an uploaded attachment or a downloadable PDF.",
+    "aliases": ["Attachment", "Download"]
+  },
+  {
+    "name": "File upload",
+    "description": "An input which allows users to upload a file from their device.",
+    "aliases": ["File input", "File uploader", "Dropzone"]
+  },
+  {
+    "name": "Footer",
+    "description": "Commonly appearing at the bottom of a page or section, a footer is used to display copyright and legal information or links to related content.",
+    "aliases": []
+  },
+  {
+    "name": "Form",
+    "description": "A grouping of input controls that allow a user to submit information to a server.",
+    "aliases": []
+  },
+  {
+    "name": "Header",
+    "description": "An element that appears across the top of all pages on a website or application; it usually contains the site name and main navigation.",
+    "aliases": []
+  },
+  {
+    "name": "Heading",
+    "description": "A title or caption used to introduce a new section.",
+    "aliases": []
+  },
+  {
+    "name": "Hero",
+    "description": "A large banner, usually appearing as one of the first items on a page; it often contains a full-width image.",
+    "aliases": ["Jumbotron", "Banner"]
+  },
+  {
+    "name": "Horizontal rule",
+    "description": "A separator between two elements, usually consisting of a horizontal line.",
+    "aliases": ["Divider", "Separator"]
+  },
+  {
+    "name": "Icon",
+    "description": "An icon is a graphic symbol designed to visually indicate the purpose of an interface element.",
+    "aliases": []
+  },
+  {
+    "name": "Image",
+    "description": "An element for embedding images.",
+    "aliases": ["Picture"]
+  },
+  {
+    "name": "Label",
+    "description": "A text label for form inputs.",
+    "aliases": ["Form label"]
+  },
+  {
+    "name": "Link",
+    "description": "A link is a reference to a resource. This can be external (e.g. a different web page) or internal (e.g. a specific element in the current document).",
+    "aliases": ["Anchor", "Hyperlink"]
+  },
+  {
+    "name": "List",
+    "description": "Lists are used for grouping a collection of related items. In HTML there are three types:\n\nunordered list \u2014 for items in no particular order.\nordered list \u2014 for items in a specific order.\ndescription list \u2014 for key-value pairs.",
+    "aliases": []
+  },
+  {
+    "name": "Modal",
+    "description": "A modal is an interface element that appears over other content. It requires an interaction from the user before they can return to whatever is underneath.",
+    "aliases": ["Dialog", "Popup", "Modal window"]
+  },
+  {
+    "name": "Navigation",
+    "description": "A container for navigation links; these can be to other pages (e.g. main site navigation) or to elements within the current page (e.g. a table of contents).",
+    "aliases": ["Nav", "Menu"]
+  },
+  {
+    "name": "Pagination",
+    "description": "Pagination is the process of splitting information over multiple pages instead of showing it all on a single page; also the name for the interface component used for navigating between these pages.",
+    "aliases": []
+  },
+  {
+    "name": "Progress bar",
+    "description": "A horizontal bar indicating the current completion status of a long-running task, usually updated continuously as the task progresses, instead of in discrete steps.",
+    "aliases": ["Progress"]
+  },
+  {
+    "name": "Progress indicator",
+    "description": "A representation of a user\u2019s progress through a series of discrete steps.",
+    "aliases": ["Progress tracker", "Stepper", "Steps", "Meter"]
+  },
+  {
+    "name": "Quote",
+    "description": "Quotes are used to display a quotation: either from a person or another outside source or to highlight a passage of the current document (a pull quote).",
+    "aliases": ["Pull quote", "Block quote"]
+  },
+  {
+    "name": "Radio button",
+    "description": "Radio buttons allow a user to select a single option from a list of predefined options.",
+    "aliases": ["Radio", "Radio group"]
+  },
+  {
+    "name": "Rating",
+    "description": "Ratings let users see and/or set a star rating for a product or other item.",
+    "aliases": []
+  },
+  {
+    "name": "Rich text editor",
+    "description": "An interface for editing \u201crich text\u201d content (i.e. with formatting), usually through a WYSIWYG interface.",
+    "aliases": ["RTE", "wysiwyg editor"]
+  },
+  {
+    "name": "Search input",
+    "description": "Search inputs allow users to find content by entering a search term.",
+    "aliases": ["Search"]
+  },
+  {
+    "name": "Segmented control",
+    "description": "A hybrid somewhere between a button group, radio buttons, and tabs; segmented controls are used to switch between different options or views.",
+    "aliases": ["Toggle button group"]
+  },
+  {
+    "name": "Select",
+    "description": "A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from.",
+    "aliases": ["Dropdown", "Select input"]
+  },
+  {
+    "name": "Skeleton",
+    "description": "A placeholder layout for content which hasn't yet loaded, usually built up of grey boxes.",
+    "aliases": ["Skeleton loader"]
+  },
+  {
+    "name": "Skip link",
+    "description": "Links within a page for skipping to another section, primarily for users who navigate using a keyboard.",
+    "aliases": []
+  },
+  {
+    "name": "Slider",
+    "description": "A form control for choosing a value within a preset range of values.",
+    "aliases": ["Range input"]
+  },
+  {
+    "name": "Spinner",
+    "description": "A visual indicator that a process is happening in the background but the interface is not yet ready for interaction.",
+    "aliases": ["Loading"]
+  },
+  {
+    "name": "Stack",
+    "description": "A wrapper component for adding a consistent margin between components.",
+    "aliases": []
+  },
+  {
+    "name": "Stepper",
+    "description": "A control for editing a numeric value with buttons for decrementing / incrementing.",
+    "aliases": ["Nudger", "Quantity"]
+  },
+  {
+    "name": "Table",
+    "description": "A component for displaying large amounts of data in rows and columns.",
+    "aliases": []
+  },
+  {
+    "name": "Tabs",
+    "description": "Tabbed interfaces are a way of navigating between multiple panels, reducing clutter and fitting more into a smaller space.",
+    "aliases": ["Tabbed interface"]
+  },
+  {
+    "name": "Text input",
+    "description": "A form control that accepts a single line of text.",
+    "aliases": []
+  },
+  {
+    "name": "Textarea",
+    "description": "A form control for editing multi-line text.",
+    "aliases": ["Textbox", "Text box"]
+  },
+  {
+    "name": "Toast",
+    "description": "A type of alert which appears in a layer above other content, visually similar to a mobile or desktop push notification.",
+    "aliases": ["Snackbar"]
+  },
+  {
+    "name": "Toggle",
+    "description": "A control used to switch between two states: often on or off.",
+    "aliases": ["Switch", "Lightswitch", "Toggle button"]
+  },
+  {
+    "name": "Tooltip",
+    "description": "A means of displaying a description or extra information about an element, usually on hover, but can also be on click or tap.",
+    "aliases": ["Popover", "Toggletip"]
+  },
+  {
+    "name": "Visually hidden",
+    "description": "Invisible text used to provide extra context for users of assistive technology.",
+    "aliases": ["Screenreader only"]
+  }
+]

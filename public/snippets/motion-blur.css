@@ -1,0 +1,75 @@
+/*---
+title: Motion Blur
+section: Snippets
+---
+
+```html
+<div class="motion-blur-container">
+ 	<div class="motion-blur"></div>
+</div>
+```
+*/
+.motion-blur-container {
+  --circle-width: 1.5rem;
+  --circle-blur-radius: calc(var(--circle-width) / 2.8);
+  --circle-spread-radius: calc(var(--circle-width) / 4.2 * -1);
+  --circle-container-height: calc(
+    var(--circle-width) + var(--circle-blur-radius) +
+      var(--circle-spread-radius)
+  );
+  --circle-rgb: var(--fg-rgb);
+  height: var(--circle-container-height);
+  margin-block: var(--gap);
+  position: relative;
+
+  width: 100%;
+}
+
+.motion-blur {
+  animation: motion-blur 3.6s var(--ease-in-out-3) infinite;
+  background-color: rgb(var(--circle-rgb));
+  border-radius: 100%;
+  height: var(--circle-width);
+  inset-block-start: 50%;
+  margin-block-start: calc(var(--circle-width) / 2 * -1);
+  position: absolute;
+  width: var(--circle-width);
+}
+
+@keyframes motion-blur {
+  0% {
+    box-shadow: 0 0 0 rgba(var(--circle-rgb), 0);
+    inset-inline-start: 0;
+  }
+  5% {
+    inset-inline-start: 0;
+    transform: scaleX(0.85);
+    transform-origin: 0 0;
+  }
+  25% {
+    box-shadow: calc(var(--circle-width) / 2.1 * -1) 0 var(--circle-blur-radius)
+      var(--circle-spread-radius) rgba(var(--circle-rgb), 0.4);
+    transform: scaleX(1.05) skewX(-3deg);
+  }
+  50% {
+    box-shadow: 0 0 0 rgba(var(--circle-rgb), 0);
+    inset-inline-start: calc(100% - var(--circle-width));
+    transform: scaleX(1) skewX(0deg);
+  }
+  55% {
+    inset-inline-start: calc(100% - var(--circle-width));
+    transform: scaleX(0.9);
+    transform-origin: 100% 0;
+  }
+  75% {
+    /* <offset-x> <offset-y> <blur-radius> <spread-radius> <color> */
+    box-shadow: calc(var(--circle-width) / 2.1) 0 var(--circle-blur-radius)
+      var(--circle-spread-radius) rgba(var(--circle-rgb), 0.4);
+    transform: scaleX(1.05) skewX(3deg);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(var(--circle-rgb), 0);
+    inset-inline-start: 0;
+    transform: scaleX(1) skewX(0deg);
+  }
+}

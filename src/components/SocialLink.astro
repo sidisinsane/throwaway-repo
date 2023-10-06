@@ -1,0 +1,107 @@
+---
+import Icon from "./Icon.astro";
+import Link from "./Link.astro";
+
+interface Props {
+  service: string;
+  alias: string;
+}
+
+const { service, alias } = Astro.props;
+---
+
+{
+  service == "homepage" && (
+    <Link href={`https://${alias}`} title="Link to Homepage">
+      <Icon name="home" />
+    </Link>
+  )
+}
+
+{
+  service == "github" && (
+    <Link href={`https://github.com/${alias}`} title="Link to Github">
+      <Icon name="github" />
+    </Link>
+  )
+}
+
+{
+  service == "codepen" && (
+    <Link href={`https://codepen.com/${alias}`} title="Link to Codepen">
+      <Icon name="codepen" />
+    </Link>
+  )
+}
+
+{
+  service == "twitter" && (
+    <Link href={`https://twitter.com/${alias}`} title="Link to Twitter">
+      <Icon name="twitter" />
+    </Link>
+  )
+}
+
+{
+  service == "youtube" && (
+    <Link href={`https://youtube.com/${alias}`} title="Link to Youtube">
+      <Icon name="youtube" />
+    </Link>
+  )
+}
+
+{
+  service == "xing" && (
+    <Link href={`https://xing.com/${alias}`} title="Link to Xing">
+      <Icon name="xing" />
+    </Link>
+  )
+}
+
+{
+  service == "linkedin" && (
+    <Link href={`https://linkedin.com/${alias}`} title="Link to LinkedIn">
+      <Icon name="linkedin" />
+    </Link>
+  )
+}
+
+{service == "email" && <p class="email">{alias}</p>}
+
+<style>
+  .social {
+    color: var(--fg);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: calc(var(--gap) / 3);
+    row-gap: calc(var(--gap) / 4);
+  }
+
+  .social__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: calc(var(--gap) / 3);
+  }
+
+  a {
+    display: flex;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: calc(var(--gap) / 6);
+    width: 1.4rem;
+    transition: color 0.2s var(--ease-1);
+  }
+
+  a:hover {
+    color: var(--fg-emphasized);
+  }
+
+  svg {
+    display: block;
+    width: 1.4rem;
+    height: auto;
+  }
+</style>

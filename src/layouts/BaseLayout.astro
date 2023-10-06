@@ -1,0 +1,132 @@
+---
+import "../styles/global.css";
+
+import PageScrollProgressIndicator from "../components/PageScrollProgressIndicator.astro";
+
+// env 
+const SITE_LOCALE = (import.meta.env.SITE_LOCALE || "en-US") as keyof typeof Intl.Locale;
+const SITE_TITLE = import.meta.env.SITE_TITLE || "Frontend Snippets";
+
+type AuthorType = {
+  slug: string;
+  collection: "authors";
+}
+
+interface Props {
+  locale?: keyof typeof Intl.Locale;
+  title?: string;
+  description?: string;
+}
+
+const {
+  locale = SITE_LOCALE,
+  title = SITE_TITLE,
+  description
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <PageScrollProgressIndicator />
+
+    <div class="page">
+      <main class="main">
+        <slot name="header" />
+        <slot />
+      </main>
+
+      <footer class="footer">
+        <slot name="footer" />
+      </footer>
+    </div>
+  </body>
+
+  <style is:global>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      --page-offset-block-start: 3rem;
+    }
+
+    body:has(.pagination) {
+      --page-offset-block-start: 6rem;
+    }
+
+    .navbar + .page {
+      padding-block-start: var(--page-offset-block-start);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .navbar {
+      background-color: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      position: fixed;
+      inset-inline-start: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+    }
+  </style>
+
+  <style is:inline>
+    .header {
+      margin-block-end: var(--gap);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .footer .byline {
+      font-size: 1rem;
+    }
+
+    main
+      > :where(
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        article,
+        section,
+        nav,
+        table,
+        .embed
+      ):not(:first-child) {
+      margin-block-start: var(--gap);
+    }
+
+    :where(article, div[lang], .container-adaptive)
+      > :where(h1, h2, h3, h4, h5, h6, nav, table, figure, .embed):not(
+        :first-child
+      ) {
+      margin-block-start: calc(var(--gap) / 2);
+    }
+
+    :where(main, div[lang]) > :where(p):not(:first-child) {
+      margin-block-start: calc(var(--gap) / 4);
+    }
+  </style>
+</html>

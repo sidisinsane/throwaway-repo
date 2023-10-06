@@ -1,0 +1,178 @@
+@import url("variables.css");
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--gutter);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: "Maven Pro", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  padding-inline: calc(var(--gap) * 2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition-duration: 0.5s;
+    transition-property: color, background-color;
+    transition-timing-function: var(--ease-elastic-3);
+  }
+}
+
+.page {
+  container-name: page;
+  container-type: inline-size;
+  display: grid;
+  gap: var(--gap);
+  margin-inline: auto;
+  max-width: var(--max-width);
+  position: relative;
+  width: 100%;
+}
+/*
+header,
+section,
+main,
+.content,
+figure:has(blockquote),
+blockquote {
+  display: grid;
+  gap: 1.5rem;
+}
+
+article {
+  display: grid;
+  gap: 3rem;
+}
+
+section,
+main {
+  max-width: var(--max-width);
+}
+
+.content > * {
+  max-width: 40em;
+}
+*/
+.full-bleed {
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  right: 50%;
+  width: 100vw;
+}
+
+/* Setup size calculation for all max utilities */
+.text-5xl-max,
+.text-4xl-max,
+.text-3xl-max,
+.text-2xl-max,
+.text-xl-max,
+.text-lg-max,
+.text-base-max,
+.text-sm-max {
+  --font-size: calc(
+    var(--min-type-size) * 1px + (var(--max-type-size) - var(--min-type-size)) *
+      (100cqw - var(--container-min) * 1px) /
+      (var(--container-max) - var(--container-min))
+  );
+  font-size: clamp(
+    var(--min-type-size) * 1px,
+    var(--font-size),
+    var(--max-type-size) * 1px
+  );
+}
+
+.text-5xl-max {
+  --max-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-4xl-max {
+  --max-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-3xl-max {
+  --max-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale)
+  );
+}
+
+.text-2xl-max {
+  --max-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-xl-max {
+  --max-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-lg-max {
+  --max-type-size: calc(var(--type-base) * var(--type-scale));
+}
+
+.text-base-max {
+  --max-type-size: var(--type-base);
+}
+
+.text-sm-max {
+  --max-type-size: calc(var(--type-base) / var(--type-scale));
+}
+
+.text-5xl-min {
+  --min-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-4xl-min {
+  --min-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-3xl-min {
+  --min-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale) *
+      var(--type-scale)
+  );
+}
+
+.text-2xl-min {
+  --min-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-xl-min {
+  --min-type-size: calc(
+    var(--type-base) * var(--type-scale) * var(--type-scale)
+  );
+}
+
+.text-lg-min {
+  --min-type-size: calc(var(--type-base) * var(--type-scale));
+}
+
+.text-base-min {
+  --min-type-size: var(--type-base);
+}
+
+.text-sm-min {
+  --min-type-size: calc(var(--type-base) / var(--type-scale));
+}

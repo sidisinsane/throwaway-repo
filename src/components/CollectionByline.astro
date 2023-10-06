@@ -1,0 +1,102 @@
+---
+// astro
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+// utils
+import {
+  i18nFormatDate,
+  removeUrlProtocol,
+} from "../lib/utils/index.ts";
+
+// components
+import Debug from "./Debug.astro";
+
+// env
+const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+
+// astro props
+interface Props {
+  entry: CollectionEntry<"snippets"> | CollectionEntry<"udhr">;
+}
+const { entry } = Astro.props;
+
+// do stuff
+const authorSlug = entry.data.author.slug || SITE_AUTHOR;
+
+let bylinePrefix = "Added ";
+if (entry.collection !== "udhr" && entry.data.author.slug) {
+  bylinePrefix = entry.data.author.slug == SITE_AUTHOR
+      ? "By "
+      : "Inspired by ";
+}
+
+let basedOnUrl = "";
+if (entry.collection == "snippets" && entry.data.isBasedOnUrl) {
+  basedOnUrl = entry.data.isBasedOnUrl;
+}
+if (entry.collection == "udhr" && entry.data.url) {
+  basedOnUrl = entry.data.url;
+}
+
+const collection = (await getEntry(
+  "authors",
+  authorSlug,
+)) as CollectionEntry<"authors">;
+---
+
+<div class:list={["byline", "collection-navigation__byline"]}>
+  {bylinePrefix}{" "}
+
+  {
+    entry.collection !== "udhr" && (
+      <>
+        <a class="byline__link" href={`/${collection.collection}/${authorSlug}/`} title="">
+          {collection.data.name || `@${collection.data.alias}`}
+        </a>
+        {". "}
+      </>
+    )
+  }
+
+  {
+    entry.data.pubDate && (
+        <time datetime={entry.data.pubDate}>
+          {i18nFormatDate({ dateString: entry.data.pubDate })}
+        </time>
+    )
+  }
+
+  {
+    basedOnUrl && (
+      <>
+      {". "}
+        <a
+          class="byline__link"
+          href={basedOnUrl}
+          title=""
+          target="_blank"
+          rel="noopener"
+        >
+          {removeUrlProtocol(basedOnUrl).toLowerCase()}
+        </a>
+      </>
+    )
+  }
+</div>
+
+<Debug item={entry} />
+
+<style>
+  .byline {
+    font-size: 0.75rem;
+  }
+
+  .byline__link {
+    text-decoration: none;
+    transition: color 0.2s var(--ease-1);
+  }
+
+  .byline__link:hover {
+    color: var(--fg-emphasized);
+  }
+</style>

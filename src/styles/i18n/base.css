@@ -1,0 +1,283 @@
+/*
+  MODERN NON-STANDARD WRITING SYSTEMS
+  
+  REFERENCES
+  This list of codes is from the ISO 15924 standard.
+    https://en.wikipedia.org/wiki/ISO_15924#List_of_codes
+  Languages using right-to-left scripts
+    https://www.w3.org/International/questions/qa-scripts.en
+  Styling vertical Chinese, Japanese, Korean and Mongolian text
+    https://www.w3.org/International/articles/vertical-text/index
+  Writing mode user tests: Chinese
+    https://www.w3.org/International/articles/vertical-text/index-data/tests/chinese.html
+  -------------------------------------------------------------------------------------------------
+
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+  |  code   |    name    |          script           |   note    | direction | writing-mode  |
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+  | ar      | Arabic     | Arab, Arabic              | joined-up | rtl       | horizontal-tb |
+  | bn      | Bengali    | Beng, Bengali             | joined-up | ltr       | horizontal-tb |
+  | fa      | Persian    | Aran, Arabic (Nastaliq)   | joined-up | rtl       | horizontal-tb |
+  | he      | Hebrew     | Hebr, Hebrew              | joined-up | rtl       | horizontal-tb |
+  | id-Arab | Indonesian | Arab, Arabic              | joined-up | rtl       | horizontal-tb |
+  | ja      | Japanese   | Hrkt, Hiragana + Katakana |           | ltr       | vertical-rl   |
+  | ja-Hani | Japanese   | Hani, Kanji               |           | ltr       | horizontal-tb |
+  | ko      | Korean     | Hang, Hangul              |           | ltr       | horizontal-tb |
+  | ks      | Kashmiri   | Arab, Arabic              | joined-up | rtl       | horizontal-tb |
+  | ks-Deva | Kashmiri   | Deva, Devanāgarī          | joined-up | ltr       | horizontal-tb |
+  | kn      | Kannada    | Knda, Kannada             | joined-up | ltr       | horizontal-tb |
+  | ml      | Malayalam  | Mlym, Malayalam           | joined-up | ltr       | horizontal-tb |
+  | ml-Hebr | Malayalam  | Hebr, Hebrew              | joined-up | rtl       | horizontal-tb |
+  | mn      | Mongolian  | Mong, Mongolian           |           | ltr       | vertical-rl   |
+  | mr      | Marathi    | Deva, Devanāgarī          | joined-up | ltr       | horizontal-tb |
+  | mr-Knda | Marathi    | Knda, Kannada             | joined-up | ltr       | horizontal-tb |
+  | ms      | Malay      | Latn, Latin               |           | ltr       | horizontal-tb |
+  | ms-Arab | Malay      | Arab, Arabic              | joined-up | rtl       | horizontal-tb |
+  | ms-Thai | Malay      | Thai, Thai                |           | ltr       | horizontal-tb |
+  | or      | Odia       | Orya, Odia                | joined-up | ltr       | horizontal-tb |
+  | pa      | Punjabi    | Arab, Arabic (Shahmukhi)  | joined-up | rtl       | horizontal-tb |
+  | pa-IN   | Punjabi    | Guru, Gurmukhī            | joined-up | ltr       | horizontal-tb |
+  | sa      | Sanskrit   | Deva, Devanāgarī          | joined-up | ltr       | horizontal-tb |
+  | sa-Knda | Sanskrit   | Knda, Kannada             | joined-up | ltr       | horizontal-tb |
+  | sa-Mlym | Sanskrit   | Mlym, Malayalam           | joined-up | ltr       | horizontal-tb |
+  | sd      | Sindhi     | Arab, Arabic              | joined-up | rtl       | horizontal-tb |
+  | sd-Guru | Sindhi     | Guru, Gurmukhī            | joined-up | ltr       | horizontal-tb |
+  | ta      | Tamil      | Taml, Tamil               | joined-up | ltr       | horizontal-tb |
+  | ta-Arab | Tamil      | Arab, Arabic (Arwi)       | joined-up | rtl       | horizontal-tb |
+  | ug      | Uyghur     | Arab, Arabic              | joined-up | rtl       | horizontal-tb |
+  | ur      | Urdu       | Aran, Arabic (Nastaliq)   | joined-up | rtl       | horizontal-tb |
+  | yi      | Yiddish    | Hebr, Hebrew              | joined-up | rtl       | horizontal-tb |
+  | zh      | Chinese    | Hans, Han (Simplified)    |           | ltr       | horizontal-tb |
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+
+*/
+
+/*
+  DEFAULTS (LTR HORIZONTAL-TB)
+  
+  Sets the text direction to be left-to-right and the writing mode to be horizontal,
+  with text flowing from top to bottom.
+*/
+
+html {
+  direction: ltr;
+  unicode-bidi: normal;
+  writing-mode: horizontal-tb;
+}
+
+/*
+  LTR HORIZONTAL-TB
+  
+  Sets the text direction to be left-to-right and the writing mode to be horizontal, 
+  with text flowing from top to bottom.
+
+  TODO
+  This shouldn't be required, since these are the defaults. Check this by mixing languages!
+  -------------------------------------------------------------------------------------------------
+
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+  |  code   |    name    |          script           |   note    | direction | writing-mode  |
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+  | ja-Hani | Japanese   | Hani, Kanji               |           | ltr       | horizontal-tb |
+  | ko      | Korean     | Hang, Hangul              |           | ltr       | horizontal-tb |
+  | zh      | Chinese    | Hans, Han (Simplified)    |           | ltr       | horizontal-tb |
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+
+*/
+:lang(ja-Hani),
+:lang(ko),
+:lang(zh) {
+  direction: ltr;
+  unicode-bidi: isolate;
+  writing-mode: horizontal-tb;
+}
+
+/*
+  LTR VERTICAL-RL
+  
+  Sets the text direction to be left-to-right and the writing mode to be vertical, 
+  with text flowing from right to left.
+  -------------------------------------------------------------------------------------------------
+
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+  |  code   |    name    |          script           |   note    | direction | writing-mode  |
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+  | ja      | Japanese   | Hrkt, Hiragana + Katakana |           | ltr       | vertical-rl   |
+  | mn      | Mongolian  | Mong, Mongolian           |           | ltr       | vertical-rl   |
+  +---------+------------+---------------------------+-----------+-----------+---------------+
+
+*/
+:lang(ja),
+:lang(mn) {
+  direction: ltr;
+  unicode-bidi: isolate;
+  writing-mode: vertical-rl;
+}
+
+:lang(ja) {
+  font-family: "Hiragino Kaku Gothic Pro", "MS Gothic", sans-serif;
+}
+
+:lang(mn) {
+  font-family: "Noto Sans Mongolian", "Noto Sans Mongolian WF",
+    "Mongolian Baiti", "Mongolian White", sans-serif;
+}
+
+/*
+  RTL HORIZONTAL-TB
+  
+  Sets the text direction to be right-to-left and the writing mode to be horizontal, 
+  with text flowing from top to bottom.
+  -------------------------------------------------------------------------------------------------
+
+  +---------+-------------+----------------------------------+------------+------------+
+  |  code   |     name    |              script              |    note    |  direction |
+  +---------+-------------+----------------------------------+------------+------------+
+  | ar      |  Arabic     |  Arab, Arabic script             |  joined-up |  rtl       |
+  | fa      |  Persian    |  Aran, Arabic (Nastaliq variant) |  joined-up |  rtl       |
+  | he      |  Hebrew     |  Hebr, Hebrew alphabet           |  joined-up |  rtl       |
+  | id-Arab |  Indonesian |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ks      |  Kashmiri   |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ml-Hebr |  Malayalam  |  Hebr, Hebrew alphabet           |  joined-up |  rtl       |
+  | ms-Arab |  Malay      |  Arab, Arabic script             |  joined-up |  rtl       |
+  | pa      |  Punjabi    |  Arab, Arabic script (Shahmukhi) |  joined-up |  rtl       |
+  | sd      |  Sindhi     |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ta-Arab |  Tamil      |  Arab, Arabic script (Arwi)      |  joined-up |  rtl       |
+  | ug      |  Uyghur     |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ur      |  Urdu       |  Aran, Arabic (Nastaliq variant) |  joined-up |  rtl       |
+  | yi      |  Yiddish    |  Hebr, Hebrew alphabet           |  joined-up |  rtl       |
+  +---------+-------------+----------------------------------+------------+------------+
+
+*/
+:lang(ar),
+:lang(fa),
+:lang(he),
+:lang(id-Arab),
+:lang(ks),
+:lang(ml-Hebr),
+:lang(ms-Arab),
+:lang(or),
+:lang(pa),
+:lang(ta-Arab),
+:lang(ug),
+:lang(ur),
+:lang(yi) {
+  direction: rtl;
+  unicode-bidi: isolate;
+  writing-mode: horizontal-tb;
+}
+
+/*
+  JOINED-UP / CURSIVE SCRIPTS
+  
+  Meaning writing systems in which characters are meant to flow together.
+  -------------------------------------------------------------------------------------------------
+
+  +---------+-------------+----------------------------------+------------+------------+
+  |  code   |     name    |              script              |    note    |  direction |
+  +---------+-------------+----------------------------------+------------+------------+
+  | ar      |  Arabic     |  Arab, Arabic script             |  joined-up |  rtl       |
+  | bn      |  Bengali    |  Beng, Bengali alphabet          |  joined-up |  ltr       |
+  | fa      |  Persian    |  Aran, Arabic (Nastaliq variant) |  joined-up |  rtl       |
+  | he      |  Hebrew     |  Hebr, Hebrew alphabet           |  joined-up |  rtl       |
+  | id-Arab |  Indonesian |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ks      |  Kashmiri   |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ks-Deva |  Kashmiri   |  Deva, Devanāgarī                |  joined-up |  ltr       |
+  | kn      |  Kannada    |  Knda, Kannada script            |  joined-up |  ltr       |
+  | ml      |  Malayalam  |  Mlym, Malayalam script          |  joined-up |  ltr       |
+  | ml-Hebr |  Malayalam  |  Hebr, Hebrew alphabet           |  joined-up |  rtl       |
+  | mr      |  Marathi    |  Deva, Devanāgarī                |  joined-up |  ltr       |
+  | mr-Knda |  Marathi    |  Knda, Kannada script            |  joined-up |  ltr       |
+  | ms-Arab |  Malay      |  Arab, Arabic script             |  joined-up |  rtl       |
+  | or      |  Odia       |  Orya, Odia script               |  joined-up |  ltr       |
+  | pa      |  Punjabi    |  Arab, Arabic script (Shahmukhi) |  joined-up |  rtl       |
+  | pa-IN   |  Punjabi    |  Guru, Gurmukhī                  |  joined-up |  ltr       |
+  | sa      |  Sanskrit   |  Deva, Devanāgarī                |  joined-up |  ltr       |
+  | sa-Knda |  Sanskrit   |  Knda, Kannada script            |  joined-up |  ltr       |
+  | sa-Mlym |  Sanskrit   |  Mlym, Malayalam script          |  joined-up |  ltr       |
+  | sd      |  Sindhi     |  Arab, Arabic script             |  joined-up |  rtl       |
+  | sd-Guru |  Sindhi     |  Guru, Gurmukhī                  |  joined-up |  ltr       |
+  | ta      |  Tamil      |  Taml, Tamil script              |  joined-up |  ltr       |
+  | ta-Arab |  Tamil      |  Arab, Arabic script (Arwi)      |  joined-up |  rtl       |
+  | ug      |  Uyghur     |  Arab, Arabic script             |  joined-up |  rtl       |
+  | ur      |  Urdu       |  Aran, Arabic (Nastaliq variant) |  joined-up |  rtl       |
+  | yi      |  Yiddish    |  Hebr, Hebrew alphabet           |  joined-up |  rtl       |
+  +---------+-------------+----------------------------------+------------+------------+
+
+*/
+:lang(ar),
+:lang(bn),
+:lang(fa),
+:lang(he),
+:lang(id-Arab),
+:lang(ks),
+:lang(ks-Deva),
+:lang(kn),
+:lang(ml),
+:lang(ml-Hebr),
+:lang(mr),
+:lang(mr-Knda),
+:lang(ms-Arab),
+:lang(or),
+:lang(pa),
+:lang(pa-IN),
+:lang(sa),
+:lang(sa-Knda),
+:lang(sa-Mylm),
+:lang(sd),
+:lang(sd-Guru),
+:lang(ta),
+:lang(ta-Arab),
+:lang(ug),
+:lang(ur),
+:lang(yi) {
+  letter-spacing: 0;
+}
+
+/*
+  TEST
+  -------------------------------------------------------------------------------------------------
+
+  +---------+------------+
+  |  code   |    word    |
+  +---------+------------+
+  | en-Latn | Food       |
+  | es-Latn | Comida     |
+  | fr-Latn | Nourriture |
+  | de-Latn | Essen      |
+  | it-Latn | Cibo       |
+  | pt-Latn | Comida     |
+  | nl-Latn | Voedsel    |
+  | ru-Cyrl | Еда        |
+  | ja-Hani | 食べ物      |
+  | zh-Hans | 食物        |
+  | ar-Arab | طعام       |
+  | hi-Deva | खाना        |
+  | bn-Beng | খাবার       |
+  | tr-Latn | Yemek      |
+  | ko-Hang | 식습        |
+  | sv-Latn | Mat        |
+  | da-Latn | Mad        |
+  | fi-Latn | Ruoka      |
+  | no-Latn | Mat        |
+  | pl-Latn | Jedzenie   |
+  | cs-Latn | Jídlo      |
+  | el-Grek | Φαγητό     |
+  | uk-Cyrl | Їжа        |
+  | hu-Latn | Étel       |
+  | th-Thai | อาหาร      |
+  | vi-Latn | Thức ăn    |
+  | in-Latn | Makanan    |
+  | ro-Latn | Mâncare    |
+  | bg-Cyrl | Храна      |
+  | hr-Latn | Hrana      |
+  +---------+------------+
+
+*/
+:lang(ar):has(:lang(it)) {
+  color: green;
+}
+
+:is(:lang(ar)) :lang(it) {
+  color: red;
+}

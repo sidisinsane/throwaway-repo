@@ -1,0 +1,6 @@
+@import url("../general/fonts.css");
+@import url("../general/typography.css");
+
+body {
+  font-family: "Maven Pro", sans-serif;
+}

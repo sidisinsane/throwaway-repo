@@ -1,0 +1,48 @@
+---
+// astro
+import type { CollectionEntry } from "astro:content";
+
+// components
+import Link from "./Link.astro";
+import Icon from "./Icon.astro";
+
+// astro props
+interface Props {
+  entry: CollectionEntry<"snippets"> | CollectionEntry<"udhr">;
+  index: number;
+  total: number;
+  prev: any | null;
+  next: any | null;
+}
+
+const { entry, index, total, prev, next } = Astro.props;
+---
+
+<nav class="pagination">
+  {
+    prev && (
+      <Link href={`/${entry.collection}/${prev.slug}/`} title={prev.data.title}>
+        <Icon name="previous" size="m" />
+      </Link>
+    )
+  }
+
+  <span>{`${index + 1}`.padStart(`${total}`.length, "0")} of {total}</span>
+
+  {
+    next && (
+      <Link href={`/${entry.collection}/${next.slug}/`} title={next.data.title}>
+        <Icon name="next" size="m" />
+      </Link>
+    )
+  }
+</nav>
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-inline: auto;
+  }
+</style>

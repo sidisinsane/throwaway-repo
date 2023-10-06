@@ -1,0 +1,68 @@
+---
+// astro
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+// components
+import AuthorSocial from "./AuthorSocial.astro";
+import Debug from "./Debug.astro";
+
+// env
+const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+
+// astro props
+interface Props {
+  authorSlug?: string;
+}
+const { authorSlug = SITE_AUTHOR } = Astro.props;
+
+// do stuff
+const collectionAuthor = (await getEntry(
+  "authors",
+  authorSlug,
+)) as CollectionEntry<"authors">;
+---
+
+<div class="author-bar">
+  <h2 class="author-bar__author">
+    <a class="author-bar__link" href={`/${collectionAuthor.collection}/${authorSlug}/`} title=""
+      >{collectionAuthor.data.name || `@${collectionAuthor.data.alias}`}</a
+    >
+  </h2>
+  <div class="author-bar__social">
+    <AuthorSocial authorSlug={authorSlug} />
+  </div>
+</div>
+
+<Debug item={collectionAuthor} debug={false} />
+
+<style>
+  .author-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: calc(var(--gap) / 4);
+    row-gap: calc(var(--gap) / 4);
+  }
+
+  .author-bar__author {
+    flex: 3;
+    font-size: 1.3333rem;
+    display: flex;
+    align-items: center;
+    column-gap: calc(var(--gap) / 4);
+  }
+
+  .author-bar__social {
+    display: grid;
+    align-items: center;
+  }
+
+  .author-bar__link {
+    text-decoration: none;
+    transition: color 0.2s var(--ease-1);
+  }
+
+  .author-bar__link:hover {
+    color: var(--fg-emphasized);
+  }
+</style>

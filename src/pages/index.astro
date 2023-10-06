@@ -1,0 +1,73 @@
+---
+// astro
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+// components
+import CollectionHero from "../components/CollectionHero.astro";
+import CollectionSection from "../components/CollectionSection.astro";
+import Debug from "../components/Debug.astro";
+// layout
+import Layout from "../layouts/BaseLayout.astro";
+
+// get collection(s)
+const collectionSnippets = (await getCollection("snippets", ({ data }) => {
+  return data.isDraft !== true;
+})) as CollectionEntry<"snippets">[];
+
+if (collectionSnippets) {
+  collectionSnippets.sort((a, b) => {
+    const objA: Date = new Date(a.data.pubDate);
+    const objB: Date = new Date(b.data.pubDate);
+
+    return objB.getTime() - objA.getTime();
+  })
+}
+
+const collectionUdhr = (await getCollection("udhr", ({ data }) => {
+  return data.isDraft !== true;
+})) as CollectionEntry<"udhr">[];
+
+if (collectionUdhr) {
+  collectionUdhr.sort((a, b) => {
+    if (a.slug < b.slug) {
+      return -1;
+    }
+
+    if (a.slug > b.slug) {
+      return 1;
+    }
+
+    return 0;
+  });
+}
+
+const collection = [...collectionSnippets, ...collectionUdhr] as (CollectionEntry<"snippets">[]
+  | CollectionEntry<"udhr">[]);
+
+
+const debug = false;
+const layoutTitle = "Home";
+
+const sections = [
+  {
+    title: "Snippets",
+    description:
+      "A collection of frontend snippets. Some of them are published on CodePen.",
+    collection: collectionSnippets
+  },
+  {
+    title: "UDHR",
+    description:
+      "The Universal Declaration of Human Rights is translated into allmost 500 languages. Ideal for i18n stuff.",
+    collection: collectionUdhr,
+  },
+];
+---
+
+<Layout title={layoutTitle}>
+  <CollectionHero collection={collection} />
+
+  { sections.map(section => <CollectionSection {...section} />) }
+  
+  <Debug item={collection} debug={debug} />
+</Layout>

@@ -1,0 +1,116 @@
+/*---
+title: Maintainable Footnotes
+section: Snippets
+see: 
+  - https://www.sitepoint.com/accessible-footnotes-css/
+  - https://www.w3.org/TR/predefined-counter-styles/#digit-styles
+---
+
+```example:html
+<article class="has-maintainable-footnotes">
+  <header>
+    <h1>Maintainable Footnotes</h1>
+    <p> Maintaining <a href="#maintainable-footnote-footnotes" aria-describedby="maintainable-footnotes-label" id="maintainable-footnote-footnotes-ref">footnotes</a> manually can be a pain. By using <a href="#maintainable-footnote-css-counters" aria-describedby="maintainable-footnotes-label" id="maintainable-footnote-css-counters-ref">
+        <abbr title="Cascading Style Sheets">CSS</abbr> counters </a> to add the numbered references in the text and an ordered list to display the actual footnotes in the footer, it becomes a bit easier. </p>
+  </header>
+  <footer>
+    <h4 id="maintainable-footnotes-label">References</h4>
+    <ol class="maintainable-footnotes">
+      <li id="maintainable-footnote-footnotes">Footnotes are notes placed at the bottom of a page. They cite references or comment on a designated part of the text above it. <a href="#maintainable-footnote-footnotes-ref" aria-label="Back to content">
+          <svg class="maintainable-footnote__icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <use xlink:href="#chevrons-up"></use>
+          </svg>
+        </a>
+      </li>
+      <li id="maintainable-footnote-css-counters">CSS counters are, in essence, variables maintained by CSS whose values may be incremented by CSS rules to track how many times they're used. <a href="#maintainable-footnote-css-counters-ref" aria-label="Back to content">
+          <svg class="maintainable-footnote__icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <use xlink:href="#chevrons-up"></use>
+          </svg>
+        </a>
+      </li>
+    </ol>
+  </footer>
+</article>
+<svg height="0" width="0">
+  <defs>
+    <symbol id="chevrons-up" width="24px" height="24px" viewBox="0 0 24 24" fill="currentColor">
+      <g>
+        <path d="m6.293 11.293 1.414 1.414L12 8.414l4.293 4.293 1.414-1.414L12 5.586z" />
+        <path d="m6.293 16.293 1.414 1.414L12 13.414l4.293 4.293 1.414-1.414L12 10.586z" />
+      </g>
+    </symbol>
+  </defs>
+</svg>
+```
+*/
+
+/* Initialize a `maintainable-footnotes-counter` counter on the wrapper */
+.has-maintainable-footnotes {
+  counter-reset: maintainable-footnotes-counter;
+}
+
+.maintainable-footnotes {
+  --maintainable-footnotes-bg: var(--highlight, yellow);
+
+  list-style-type: decimal;
+  padding-inline-start: 0;
+}
+
+/*
+  Inline footnotes references
+  1. Increment the counter at each new reference
+  2. Add link styles
+*/
+[aria-describedby^="maintainable-footnotes-label"] {
+  color: currentColor;
+  counter-increment: maintainable-footnotes-counter;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}
+
+/*
+  Actual numbered references
+  1. Display the current state of the counter (e.g. `¹`)
+  2. Add link styles on the number
+*/
+[aria-describedby^="maintainable-footnotes-label"]::after {
+  content: counter(maintainable-footnotes-counter, maintainable-footnotes);
+  margin-inline-start: 0.125em;
+}
+
+/* Reset the default focused styles on the number */
+[aria-describedby^="maintainable-footnotes-label"]:focus::after {
+  outline: thin dotted;
+  outline-offset: 2px;
+}
+
+/* Highlight target note */
+.maintainable-footnotes :target {
+  animation: maintainable-footnotes 6s;
+}
+
+.maintainable-footnote__icon {
+  height: 1rem;
+  width: auto;
+}
+
+@counter-style maintainable-footnotes {
+  system: numeric;
+  symbols: "\2070" "\B9" "\B2" "\B3" "\2074" "\2075" "\2076" "\2077" "\2078"
+    "\2079";
+  /* symbols: '⁰' '¹' '²' '³' '⁴' '⁵' '⁶' '⁷' '⁸' '⁹'; */
+  suffix: " ";
+}
+
+@keyframes maintainable-footnotes {
+  0% {
+    background-color: inherit;
+  }
+  50% {
+    background-color: var(--maintainable-footnotes-bg, yellow);
+  }
+  100% {
+    background-color: inherit;
+  }
+}

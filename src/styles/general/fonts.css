@@ -1,0 +1,133 @@
+/* --------------------------------------------------------------------------------------------------------------------
+
+VARIABLE FONTS
+
+Scripts
++----------------+--------+----------+--------------+-------+-----------+-------+-----------+------------+
+| Font           | arabic | cyrillic | cyrillic-ext | greek | greek-ext | latin | latin-ext | vietnamese |
++----------------+--------+----------+--------------+-------+-----------+-------+-----------+------------+
+| Cairo          | +      |          |              |       |           | +     | +         |            |
+| Maven Pro      |        |          |              |       |           | +     | +         |            |
+| Montserat      |        | +        | +            |       |           | +     | +         |            |
+| Noto Sans Mono |        | +        | +            | +     | +         | +     | +         | +          |
++----------------+--------+----------+--------------+-------+-----------+-------+-----------+------------+
+
+Styles & Weights
++----------------+--------+--------+-----+-----+-----+-----+-----+-----+-----+-----+-----+------+
+| Font           | normal | italic | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 |
++----------------+--------+--------+-----+-----+-----+-----+-----+-----+-----+-----+-----+------+
+| Cairo          | +      |        |     | +   | +   | +   | +   | +   | +   | +   | +   | +    |
+| Maven Pro      | +      |        |     |     |     | +   | +   | +   | +   | +   | +   |      |
+| Montserat      | +      | +      | +   | +   | +   | +   | +   | +   | +   | +   | +   |      |
+| Noto Sans Mono | +      |        | +   | +   | +   | +   | +   | +   | +   | +   | +   |      |
++----------------+--------+--------+-----+-----+-----+-----+-----+-----+-----+-----+-----+------+
+
+-------------------------------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------------------------------
+
+Cairo
+https://fonts.google.com/specimen/Cairo
+
+-------------------------------------------------------------------------------------------------------------------- */
+@font-face {
+  font-display: swap;
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: 200 300 400 500 600 700 800 900 1000;
+  size-adjust: 109%;
+  src: url("/fonts/Cairo/Cairo-VariableFont_slnt\,wght.ttf")
+    format("woff2-variations");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+
+Maven Pro
+https://fonts.google.com/specimen/Maven+Pro
+
+-------------------------------------------------------------------------------------------------------------------- */
+@font-face {
+  font-display: swap;
+  font-family: "Maven Pro";
+  font-style: normal;
+  font-weight: 400 500 600 700 800 900;
+  size-adjust: 100%;
+  src: url("/fonts/Maven_Pro/MavenPro-VariableFont_wght.ttf")
+    format("woff2-variations");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+
+Montserrat
+https://fonts.google.com/specimen/Montserrat
+
+-------------------------------------------------------------------------------------------------------------------- */
+@font-face {
+  font-display: swap;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  size-adjust: 90%;
+  src: url("/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+    format("woff2-variations");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  size-adjust: 90%;
+  src: url("/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf")
+    format("woff2-variations");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+
+Noto Sans Mono
+https://fonts.google.com/specimen/Noto+Sans+Mono
+
+-------------------------------------------------------------------------------------------------------------------- */
+@font-face {
+  font-display: swap;
+  font-family: "Noto Sans Mono";
+  font-stretch: 100%;
+  font-style: normal;
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  src: url("/fonts/Noto_Sans_Mono/NotoSansMono-VariableFont_wdth\,wght.ttf")
+    format("woff2-variations");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+
+EmojiOne
+https://github.com/joypixels/emoji-toolkit
+
+-------------------------------------------------------------------------------------------------------------------- */
+
+@font-face {
+  font-display: swap;
+  font-family: EmojiOne;
+  src: url("/fonts/emojione/emojione-svg.woff2") format("woff2");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+
+Font Classes
+
+-------------------------------------------------------------------------------------------------------------------- */
+.font-cairo {
+  font-family: Cairo, sans-serif;
+}
+
+.font-maven-pro {
+  font-family: "Maven Pro", sans-serif;
+}
+
+.font-montserrat {
+  font-family: Montserrat, sans-serif;
+}
+
+.font-noto-sans-mono {
+  font-family: "Noto Sans Mono", monospace;
+}

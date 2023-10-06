@@ -1,0 +1,8 @@
+.no-widows,
+.no-orphans {
+  white-space: nowrap;
+}
+
+.no-widows-no-orphans-reformatted {
+  width: 100%;
+}

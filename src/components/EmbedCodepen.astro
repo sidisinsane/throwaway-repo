@@ -1,0 +1,59 @@
+---
+type TabType = "css" | "html" | "js" | "result";
+
+interface Props {
+  slug: string;
+  user?: string;
+  name?: string;
+  height?: number;
+  tabs?: TabType[];
+  editable?: boolean;
+  clickToLoad?: boolean;
+}
+
+const CODEPEN_USER = import.meta.env.CODEPEN_USER || "sidisinsane";
+const CODEPEN_NAME = import.meta.env.CODEPEN_NAME || "Dirk Sidney Jansen";
+
+const {
+  slug,
+  user = CODEPEN_USER,
+  name = CODEPEN_NAME,
+  height = 400,
+  tabs = ["html", "result"],
+  editable = true,
+  clickToLoad = false,
+} = Astro.props;
+
+const penURL = `https://codepen.io/${user}/pen/${slug}`;
+const userURL = `https://codepen.io/${user}`;
+---
+
+<div class="embed">
+  <p
+    class="codepen"
+    data-user={user}
+    data-slug-hash={slug}
+    data-default-tab={`${tabs.join(",")}`}
+    data-height={height}
+    data-editable={`${editable}`}
+    data-preview={`${clickToLoad}`}
+  >
+    <span
+      >See the Pen <a href={penURL}>{slug}</a>
+       by {name} (<a href={userURL}>@{user}</a>) on <a href="https://codepen.io"
+        >CodePen</a
+      >.
+    </span>
+  </p>
+</div>
+
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<style>
+  .embed {
+    box-sizing: border-box;
+    border: 0.25rem solid var(--bg-deemphasized);
+    display: block;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+// astro
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+// components
+import CollectionHero from "../../components/CollectionHero.astro";
+import CollectionSection from "../../components/CollectionSection.astro";
+import Debug from "../../components/Debug.astro";
+
+// layout
+import Layout from "../../layouts/BaseLayout.astro";
+
+// astro props
+interface Props {
+  entries: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+}
+
+export async function getStaticPaths() {
+  const snippets = (await getCollection("snippets", ({ data }) => {
+    return data.isDraft !== true;
+  })) as CollectionEntry<"snippets">[];
+
+  const udhr = (await getCollection("udhr", ({ data }) => {
+    return data.isDraft !== true;
+  })) as CollectionEntry<"udhr">[];
+
+  const entries = [...snippets, ...udhr] as
+    | CollectionEntry<"snippets">[]
+    | CollectionEntry<"udhr">[];
+
+  // Tags
+  const udhrTags = [...new Set(udhr.map((entry) => entry.data.tags).flat())];
+
+  const snippetsTags = [
+    ...new Set(snippets.map((entry) => entry.data.tags).flat()),
+  ];
+
+  const tags = [...snippetsTags, ...udhrTags].sort();
+
+  return tags.map((tag) => {
+    const entriesFiltered = entries.filter((entry) =>
+      entry.data.tags.includes(tag),
+    ) as CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+    return {
+      params: { tag },
+      props: { entries: entriesFiltered },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { entries } = Astro.props;
+---
+
+<Layout title={tag}>
+  <CollectionHero collection={entries} isTag={true}>
+    {tag}
+  </CollectionHero>
+
+  <CollectionSection title={tag as string} collection={entries} isTag={true} />
+
+  <Debug item={entries} debug={false} />
+</Layout>

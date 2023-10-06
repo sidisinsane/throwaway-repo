@@ -1,0 +1,70 @@
+/*---
+title: Squircle
+section: Snippets
+---
+
+A squircle is an intermediate shape between a square and a circle. Popularized by Apple.
+
+```example:html
+<div class="squircle">
+  <div class="squircle__inline">
+    <h3 class="squircle__headline">squircle</h3>
+  </div>
+</div>
+```
+
+*/
+
+.squircle {
+  --squircle-fg: var(--bg, #ffffff);
+  --squircle-bg: var(--fg, #333333);
+  --squircle-size: clamp(240px, 25vw, 480px);
+  --squircle-radii: 50% / 10%;
+
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  margin-block-start: 7.5%;
+  margin-inline: auto;
+  max-width: 80%;
+  position: relative;
+
+  width: var(--squircle-size);
+}
+
+.squircle::before,
+.squircle::after {
+  align-self: center;
+  background-color: var(--squircle-bg);
+  content: "";
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.squircle::before,
+.squircle::after {
+  border-radius: var(--squircle-radii);
+  height: 115%;
+  width: 100%;
+}
+
+.squircle::after {
+  transform: rotate(90deg);
+}
+
+.squircle__inline {
+  border-radius: 5%;
+  display: grid;
+  inset-block: 5%;
+  inset-inline: 5%;
+  place-content: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.squircle__headline {
+  color: var(--squircle-fg);
+  font-size: clamp(1rem, 4vw, 3rem);
+}

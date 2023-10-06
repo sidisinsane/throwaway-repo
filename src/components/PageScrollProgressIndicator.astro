@@ -1,0 +1,31 @@
+<div class="page-scroll-progress-indicator"></div>
+
+<style>
+  .page-scroll-progress-indicator {
+    --page-scroll-progress-indicator-height: 0.25rem;
+    --page-scroll-progress-indicator-bg: var(--highlight);
+
+    background-color: var(--page-scroll-progress-indicator-bg);
+    display: block;
+    width: 100vw;
+    height: var(--page-scroll-progress-indicator-height);
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 100;
+    transform-origin: 0 50%;
+    animation-timeline: scroll(root);
+    animation-name: page-scroll-progress-indicator;
+    animation-duration: auto;
+    animation-timing-function: linear;
+  }
+
+  @keyframes page-scroll-progress-indicator {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+</style>

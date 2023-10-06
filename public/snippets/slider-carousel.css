@@ -1,0 +1,433 @@
+/*---
+title: Slider Carousel
+section: Snippets
+---
+
+```example:html
+<div class="slider-carousel-container">
+  <div class="slider-carousel slider-carousel--square">
+    <div class="slider-carousel__scroller">
+      <div
+        class="slider-carousel__item active"
+        tabindex="0"
+        id="slider-carousel-1-item-1"
+        data-index="1"
+      >
+        <img
+          src="/img/photos/01@1080x1080.jpg"
+          width="1080"
+          height="1080"
+          alt=""
+        />
+      </div>
+      <div
+        class="slider-carousel__item active"
+        tabindex="0"
+        id="slider-carousel-1-item-2"
+        data-index="2"
+      >
+        <img src="/img/02@1080x1080.jpg" width="1080" height="1080" alt="" />
+      </div>
+      <div
+        class="slider-carousel__item active"
+        tabindex="0"
+        id="slider-carousel-1-item-3"
+        data-index="3"
+      >
+        <img src="/img/03@1080x1080.jpg" width="1080" height="1080" alt="" />
+      </div>
+    </div>
+    <nav class="slider-carousel__nav">
+      <li class="slider-carousel__nav-item">
+        <a
+          href="#slider-carousel-1-item-1"
+          class="slider-carousel__nav-link active"
+          data-index="1"
+          >•</a
+        ><a
+          href="#slider-carousel-1-item-2"
+          class="slider-carousel__nav-link active"
+          data-index="2"
+          >•</a
+        ><a
+          href="#slider-carousel-1-item-3"
+          class="slider-carousel__nav-link active"
+          data-index="3"
+          >•</a
+        >
+      </li>
+    </nav>
+  </div>
+</div>
+```
+
+```example:js
+import sliderCarousel from "slider-carousel";
+
+const sliderCarouselEls = document.querySelectorAll(".slider-carousel");
+
+sliderCarouselEls.forEach((element, index) => {
+  sliderCarousel({
+    parentEl: element,
+    idPrefix: `slider-carousel-${index + 1}-item`,
+  });
+});
+```
+
+```example:js
+export default function sliderCarousel(props) {
+  const {
+    parentEl,
+    idPrefix = "slider-carousel-item",
+    cssVariable = "--slider-carousel-items-per-screen",
+  } = props;
+
+  const items = parentEl.querySelectorAll(".slider-carousel__item");
+  let itemsPerScreen = getItemsPerScreen();
+
+  init();
+  window.addEventListener("resize", handleResize);
+  window.addEventListener("orientationchange", handleResize);
+
+  function handleResize() {
+    buildNav();
+
+    items.forEach((item) => {
+      intersectionObserver().observe(item);
+    });
+  }
+
+  function init() {
+    initializeSliderCarouselItems();
+    buildNav();
+
+    items.forEach((item) => {
+      intersectionObserver().observe(item);
+    });
+  }
+
+  function initializeSliderCarouselItems() {
+    items.forEach((item, index) => {
+      const itemId = `${idPrefix}-${index + 1}`;
+      item.id = itemId;
+      item.setAttribute("data-index", `${index + 1}`);
+    });
+  }
+
+  function buildNav() {
+    const currNavEl = parentEl.querySelector(".slider-carousel__nav");
+
+    if (!parentEl || !items) {
+      return;
+    }
+
+    const itemsArray = Array.from(items);
+    const currItemsPerScreen = getItemsPerScreen();
+    if (currNavEl && itemsPerScreen === currItemsPerScreen) {
+      return;
+    }
+
+    itemsPerScreen =
+      itemsPerScreen !== currItemsPerScreen
+        ? currItemsPerScreen
+        : itemsPerScreen;
+    const linksPerNavItem = Math.ceil(items.length / itemsPerScreen);
+
+    const navEl = document.createElement("nav");
+    navEl.classList.add("slider-carousel__nav");
+
+    for (let i = 0; i < linksPerNavItem; i++) {
+      const navItemEl = document.createElement("li");
+      navItemEl.classList.add("slider-carousel__nav-item");
+      navEl.appendChild(navItemEl);
+
+      for (
+        let j = 0;
+        j < itemsPerScreen && i * itemsPerScreen + j < itemsArray.length;
+        j++
+      ) {
+        const index = i * itemsPerScreen + j;
+        const item = itemsArray[index];
+        const itemId = item.id;
+        const itemDataIndex = item.getAttribute("data-index");
+
+        const navLinkEl = document.createElement("a");
+        navLinkEl.setAttribute("href", `#${itemId}`);
+        navLinkEl.classList.add("slider-carousel__nav-link");
+        navLinkEl.setAttribute("data-index", `${itemDataIndex}`);
+        navLinkEl.innerHTML = "&bull;";
+        navLinkEl.addEventListener("click", (evt) => {
+          evt.preventDefault();
+          item.scrollIntoView(false);
+        });
+
+        navItemEl.appendChild(navLinkEl);
+      }
+    }
+
+    if (currNavEl) {
+      currNavEl.remove();
+    }
+
+    parentEl.appendChild(navEl);
+  }
+
+  function getItemsPerScreen() {
+    if (!parentEl) {
+      return 0;
+    }
+
+    return parseFloat(getComputedStyle(parentEl).getPropertyValue(cssVariable));
+  }
+
+  function intersectionObserver() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const item = entry.target;
+          const dataIndex = item.getAttribute("data-index");
+          const link = parentEl.querySelector(
+            `.slider-carousel__nav-link[data-index="${dataIndex}"]`,
+          );
+
+          if (entry.isIntersecting) {
+            item.classList.add("active");
+            link?.classList.add("active");
+          } else {
+            item.classList.remove("active");
+            link?.classList.remove("active");
+          }
+        });
+      },
+      {
+        root: parentEl,
+        rootMargin: "0px",
+        threshold: 1.0,
+      },
+    );
+
+    return observer;
+  }
+}
+```
+
+```example:color
+@color: #1e293b @name: Dark Grey
+@color: #ef4444 @name: Salmon
+```
+*/
+
+/*
+Social Media Image Size Guide¹
+
++---------------+-----------+-----------+-----------+-----------+
+|               | Instagram | Facebook  | LinkedIn  | Twitter   |
++---------------+-----------+-----------+-----------+-----------+
+| Profile Photo | 320x320   | 196x196   | 400x400   | 400x400   |
+| Cover Photo   |           | 851x315   | 1128x1191 | 1500x500  |
+| Landscape     | 1080x566  | 1200x630  | 1200x627  | 1600x900  |
+| Portrait      | 1080x1350 | 1080x1350 | 1080x1350 | 1080x1350 |
+| Square        | 1080x1080 | 1080x1080 | 1080x1080 | 1080x1080 |
++---------------+-----------+-----------+-----------+-----------+
+
+References: 
+
+1. “Social Media Image Size Guide For All Platforms In 2023”. Search Engine Journal. 
+   https://www.searchenginejournal.com/social-media-image-sizes/488891/
+------------------------------------------------------------------------------------------------*/
+
+.slider-carousel-container {
+  container-name: slider-carousel-container;
+  container-type: inline-size;
+}
+
+.slider-carousel {
+  --slider-carousel-items-per-screen: 1;
+  --slider-carousel-gap: 0.25rem;
+  --slider-carousel-scroll-snap-align: center;
+  --slider-carousel-link-font-size: 1.25rem;
+  --slider-carousel-item-outline-width: 2px;
+  --slider-carousel-aspect-ratio: 16 / 9;
+  align-items: flex-end;
+
+  color: var(--fg);
+
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.slider-carousel--profile,
+.slider-carousel--square {
+  --slider-carousel-aspect-ratio: 1;
+}
+
+.slider-carousel--cover,
+.slider-carousel--cover-twitter {
+  --slider-carousel-aspect-ratio: 376 / 397;
+}
+
+.slider-carousel--cover-linkedin {
+  --slider-carousel-aspect-ratio: 851 / 315;
+}
+
+.slider-carousel--cover-facebook {
+  --slider-carousel-aspect-ratio: 40 / 21;
+}
+
+.slider-carousel--landscape,
+.slider-carousel--landscape-twitter {
+  --slider-carousel-aspect-ratio: 16 / 9;
+}
+
+.slider-carousel--landscape-linkedin {
+  --slider-carousel-aspect-ratio: 400 / 209;
+}
+
+.slider-carousel--landscape-facebook {
+  --slider-carousel-aspect-ratio: 40 / 21;
+}
+
+.slider-carousel--landscape-instagram {
+  --slider-carousel-aspect-ratio: 540 / 283;
+}
+
+.slider-carousel--portrait {
+  --slider-carousel-aspect-ratio: 4 / 5;
+}
+
+@container slider-carousel-container (min-width: 768px) {
+  .slider-carousel {
+    --slider-carousel-items-per-screen: 2;
+    --slider-carousel-scroll-snap-align: start;
+    --slider-carousel-link-font-size: 1.75rem;
+  }
+}
+
+@container slider-carousel-container (min-width: 1000px) {
+  .slider-carousel {
+    --slider-carousel-items-per-screen: 3;
+    --slider-carousel-scroll-snap-align: center;
+  }
+}
+
+@container slider-carousel-container (min-width: 1200px) {
+  .slider-carousel {
+    --slider-carousel-items-per-screen: 4;
+  }
+}
+
+.slider-carousel__scroller {
+  display: grid;
+  gap: var(--slider-carousel-gap);
+  grid-auto-columns: calc(100% / var(--slider-carousel-items-per-screen));
+  grid-auto-flow: column;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  padding-inline: var(--gap, 3rem);
+  scroll-behavior: smooth;
+  scroll-padding-inline: var(--gap, 3rem);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.slider-carousel__scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-carousel__scroller::scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider-carousel__scroller {
+    scroll-behavior: auto;
+  }
+}
+
+.slider-carousel__item {
+  aspect-ratio: var(--slider-carousel-aspect-ratio);
+  opacity: 0.5;
+  overflow: hidden;
+  scroll-snap-align: var(--slider-carousel-scroll-snap-align);
+  transition: opacity 100ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider-carousel__item {
+    transition: none;
+  }
+}
+
+.slider-carousel__item:focus,
+.slider-carousel__item:focus-visible {
+  outline-color: var(--highlight);
+  outline-offset: calc(var(--slider-carousel-item-outline-width) * -1);
+  outline-style: solid;
+  outline-width: var(--slider-carousel-item-outline-width);
+}
+
+.slider-carousel__item.active {
+  opacity: 1;
+}
+
+.slider-carousel__item > img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.slider-carousel__nav {
+  display: flex;
+  gap: var(--slider-carousel-gap);
+  justify-content: center;
+  list-style-type: none;
+  padding-inline: var(--gap, 3rem);
+}
+
+.slider-carousel__nav-item {
+  display: flex;
+  flex: 0 0 auto;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  font-size: var(--slider-carousel-link-font-size);
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.slider-carousel__nav-link {
+  -webkit-text-fill-color: var(--fg);
+  -webkit-text-stroke-color: var(--fg);
+  -webkit-text-stroke-width: 0;
+  color: var(--fg);
+  display: block;
+  text-decoration: none;
+}
+
+.slider-carousel__nav-link.active {
+  -webkit-text-fill-color: var(--highlight);
+  -webkit-text-stroke-color: var(--highlight);
+  color: var(--highlight);
+}
+
+.sr-only {
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
