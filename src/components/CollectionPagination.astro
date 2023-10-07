@@ -3,7 +3,6 @@
 import type { CollectionEntry } from "astro:content";
 
 // components
-import Link from "./Link.astro";
 import Icon from "./Icon.astro";
 
 // astro props
@@ -21,12 +20,12 @@ const { collection, index, total, prev, next } = Astro.props;
 <nav class="pagination">
   {
     prev && (
-      <Link
+      <a
         href={`/${collection.collection}/${prev.slug}/`}
         title={prev.data.title}
       >
         <Icon name="previous" size="m" />
-      </Link>
+      </a>
     )
   }
 
@@ -34,12 +33,12 @@ const { collection, index, total, prev, next } = Astro.props;
 
   {
     next && (
-      <Link
+      <a
         href={`/${collection.collection}/${next.slug}/`}
         title={next.data.title}
       >
         <Icon name="next" size="m" />
-      </Link>
+      </a>
     )
   }
 </nav>

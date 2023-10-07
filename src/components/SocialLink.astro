@@ -1,7 +1,6 @@
 ---
 // components
 import Icon from "./Icon.astro";
-import Link from "./Link.astro";
 
 // astro props
 interface Props {
@@ -14,57 +13,92 @@ const { service, alias } = Astro.props;
 
 {
   service == "homepage" && (
-    <Link href={`https://${alias}`} title="Link to Homepage">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://${alias}`}
+      title="Link to Homepage"
+    >
       <Icon name="home" />
-    </Link>
+    </a>
   )
 }
 
 {
   service == "github" && (
-    <Link href={`https://github.com/${alias}`} title="Link to Github">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://github.com/${alias}`}
+      title="Link to Github"
+    >
       <Icon name="github" />
-    </Link>
+    </a>
   )
 }
 
 {
   service == "codepen" && (
-    <Link href={`https://codepen.com/${alias}`} title="Link to Codepen">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://codepen.com/${alias}`}
+      title="Link to Codepen"
+    >
       <Icon name="codepen" />
-    </Link>
+    </a>
   )
 }
 
 {
   service == "twitter" && (
-    <Link href={`https://twitter.com/${alias}`} title="Link to Twitter">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://twitter.com/${alias}`}
+      title="Link to Twitter"
+    >
       <Icon name="twitter" />
-    </Link>
+    </a>
   )
 }
 
 {
   service == "youtube" && (
-    <Link href={`https://youtube.com/${alias}`} title="Link to Youtube">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://youtube.com/${alias}`}
+      title="Link to Youtube"
+    >
       <Icon name="youtube" />
-    </Link>
+    </a>
   )
 }
 
 {
   service == "xing" && (
-    <Link href={`https://xing.com/${alias}`} title="Link to Xing">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://xing.com/${alias}`}
+      title="Link to Xing"
+    >
       <Icon name="xing" />
-    </Link>
+    </a>
   )
 }
 
 {
   service == "linkedin" && (
-    <Link href={`https://linkedin.com/${alias}`} title="Link to LinkedIn">
+    <a
+      rel="noopener"
+      target="_blank"
+      href={`https://linkedin.com/${alias}`}
+      title="Link to LinkedIn"
+    >
       <Icon name="linkedin" />
-    </Link>
+    </a>
   )
 }
 

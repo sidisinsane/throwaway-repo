@@ -1,7 +1,6 @@
 ---
 // components
 import Icon from "./Icon.astro";
-import Link from "./Link.astro";
 
 // do stuff
 const pathname = new URL(Astro.request.url).pathname;
@@ -40,7 +39,7 @@ const links = [
 <nav class="site-navigation">
   {
     links.map((link) => (
-      <Link
+      <a
         class:list={[
           "site-navigation__link",
           currentPath === link.path ? "is-active" : "",
@@ -50,7 +49,7 @@ const links = [
         aria-label={link.label}
       >
         <Icon name={link.icon} size="m" />
-      </Link>
+      </a>
     ))
   }
 </nav>
