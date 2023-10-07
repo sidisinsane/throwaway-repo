@@ -3,8 +3,9 @@
 import type { CollectionEntry } from "astro:content";
 
 // components
-// import CollectionTags from "./CollectionTags.astro";
+import CollectionTags from "./CollectionTags.astro";
 // import CollectionAuthorBar from "./CollectionAuthorBar.astro";
+import Debug from "./Debug.astro";
 
 // env
 type AuthorType = {
@@ -23,14 +24,14 @@ interface Props {
   author?: AuthorType;
   isTag?: boolean;
 }
-const { collection, author = DEFAULT_AUTHOR, isTag } = Astro.props;
+const { collection, author = DEFAULT_AUTHOR, isTag = false } = Astro.props;
 ---
 
 <header class="hero">
   <div class="hero__inner">
     <slot />
 
-    <!-- {!isTag && <CollectionTags collection={collection} />} -->
+    {!isTag && <CollectionTags collection={collection} />}
 
     <!-- {
       !isTag && (
@@ -41,6 +42,10 @@ const { collection, author = DEFAULT_AUTHOR, isTag } = Astro.props;
     } -->
   </div>
 </header>
+
+<Debug item={isTag} debug={false} />
+<Debug item={author} debug={false} />
+<Debug item={collection} debug={false} />
 
 <style>
   .hero {
