@@ -25,10 +25,10 @@ const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
 const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
-const authorHref = `/${collectionAuthor.collection}/${collectionAuthor.slug}`;
-const authorName = `${
-  collectionAuthor.data.name || "@" + collectionAuthor.data.alias
-}`;
+const authorHref =
+  `/${collectionAuthor.collection}/${collectionAuthor.slug}` as string;
+const authorName = (collectionAuthor.data.name ||
+  collectionAuthor.data.alias) as string;
 ---
 
 <div class="author-bar">
