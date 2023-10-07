@@ -24,9 +24,7 @@ interface Props {
 const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
-const collectionAuthor = (await getEntry(
-  author as AuthorType,
-)) as CollectionEntry<"authors">;
+const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
 ---
 
 <div class="author-bar">
