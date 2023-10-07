@@ -26,7 +26,7 @@ const { author = DEFAULT_AUTHOR } = Astro.props;
 // do stuff
 const collectionAuthor = (await getEntry(
   "authors",
-  "sidisinsane",
+  author.slug as string,
 )) as CollectionEntry<"authors">;
 // const authorHref =
 //   `/${collectionAuthor.collection}/${collectionAuthor.slug}` as string;
@@ -45,7 +45,15 @@ const collectionAuthor = (await getEntry(
 
 <Debug item={collectionAuthor} debug={true} />
 {
-  collectionAuthor.collection && (
+  author?.slug && (
+    <>
+      <Debug item={author.slug} debug={true} />
+      <Debug item={typeof author.slug} debug={true} />
+    </>
+  )
+}
+{
+  collectionAuthor?.collection && (
     <Debug item={collectionAuthor.collection} debug={true} />
   )
 }
