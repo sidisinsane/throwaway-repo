@@ -4,12 +4,12 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 // components
-import CollectionHero from "../components/CollectionHero.astro";
+// import CollectionHero from "../components/CollectionHero.astro";
 import CollectionSection from "../components/CollectionSection.astro";
 import Debug from "../components/Debug.astro";
 
 // layout
-import Layout from "../layouts/BaseLayout.astro";
+import Layout from "../layouts/NakedLayout.astro";
 
 // get collection(s)
 const collectionSnippets = (await getCollection("snippets", ({ data }) => {
@@ -68,8 +68,6 @@ const sections = [
 ---
 
 <Layout title={layoutTitle}>
-  <CollectionHero collection={collection} />
-
   {sections.map((section) => <CollectionSection {...section} />)}
 
   <Debug item={collection} debug={debug} />
