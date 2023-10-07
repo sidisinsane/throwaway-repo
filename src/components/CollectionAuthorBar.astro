@@ -24,23 +24,23 @@ interface Props {
 const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
-const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
-const authorHref =
-  `/${collectionAuthor.collection}/${collectionAuthor.slug}` as string;
-const authorName = (collectionAuthor.data.name ||
-  collectionAuthor.data.alias) as string;
+// const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
+// const authorHref =
+//   `/${collectionAuthor.collection}/${collectionAuthor.slug}` as string;
+// const authorName = (collectionAuthor.data.name ||
+//   collectionAuthor.data.alias) as string;
 ---
 
 <div class="author-bar">
   <h2 class="author-bar__author">
-    <a class="author-bar__link" href={authorHref} title="">{authorName}</a>
+    <a class="author-bar__link" href="#" title="">noname</a>
   </h2>
   <!-- <div class="author-bar__social">
     <AuthorSocial author={author as AuthorType} />
   </div> -->
 </div>
 
-<Debug item={collectionAuthor} />
+<!--Debug item={collectionAuthor} /-->
 
 <style>
   .author-bar {
