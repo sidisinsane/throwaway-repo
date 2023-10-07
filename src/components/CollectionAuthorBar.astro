@@ -24,7 +24,10 @@ interface Props {
 const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
-const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
+const collectionAuthor = (await getEntry(
+  "authors",
+  author.slug,
+)) as CollectionEntry<"authors">;
 // const authorHref =
 //   `/${collectionAuthor.collection}/${collectionAuthor.slug}` as string;
 // const authorName = (collectionAuthor.data.name ||
