@@ -40,7 +40,8 @@ const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
   </div> -->
 </div>
 
-<Debug item={collectionAuthor} />
+<Debug item={collectionAuthor} debug={true} />
+<Debug item={collectionAuthor.collection} debug={true} />
 
 <style>
   .author-bar {
