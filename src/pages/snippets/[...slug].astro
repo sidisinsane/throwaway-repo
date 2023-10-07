@@ -15,7 +15,7 @@ import Layout from "../../layouts/BaseLayout.astro";
 
 // astro props
 interface Props extends CollectionPaginationProps {
-  entry: CollectionEntry<"snippets">;
+  collection: CollectionEntry<"snippets">;
 }
 
 export async function getStaticPaths() {
@@ -34,7 +34,7 @@ export async function getStaticPaths() {
     params: { slug: entry.slug },
     props: {
       index: index,
-      entry: entry,
+      collection: entry,
       total: collectionSnippets.length,
       prev: index - 1 >= 0 ? collectionSnippets[index - 1] : null,
       next:
@@ -45,15 +45,15 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
+const { collection } = Astro.props;
 
 // do stuff
-const { Content } = await entry.render();
+const { Content } = await collection.render();
 
 const layoutProps = {
-  locale: entry.data?.locale as keyof typeof Intl.Locale,
-  title: entry.data.title,
-  description: entry.data?.description,
+  locale: collection.data?.locale as keyof typeof Intl.Locale,
+  title: collection.data.title,
+  description: collection.data?.description,
 };
 ---
 
@@ -66,7 +66,11 @@ const layoutProps = {
 
   <Content />
 
-  {entry.data.codepenSlug && <EmbedCodepen slug={entry.data.codepenSlug} />}
+  {
+    collection.data.codepenSlug && (
+      <EmbedCodepen slug={collection.data.codepenSlug} />
+    )
+  }
 
-  <Debug item={entry.data} debug={false} />
+  <Debug item={collection.data} debug={false} />
 </Layout>

@@ -1,71 +1,58 @@
 ---
+// components
 import Icon from "./Icon.astro";
+import Link from "./Link.astro";
 
+// do stuff
 const pathname = new URL(Astro.request.url).pathname;
 const pathParts = pathname.split("/");
 const currentPath = pathParts[1];
+
+const links = [
+  {
+    label: "Home",
+    icon: "home",
+    path: "",
+  },
+  {
+    label: "Snippets",
+    icon: "snippet",
+    path: "snippets",
+  },
+  {
+    label: "UDHR",
+    icon: "globe",
+    path: "udhr",
+  },
+  {
+    label: "Tags",
+    icon: "hashtag",
+    path: "tags",
+  },
+  {
+    label: "Authors",
+    icon: "person",
+    path: "authors",
+  },
+];
 ---
 
 <nav class="site-navigation">
-  <a
-    class:list={[
-      "site-navigation__link",
-      currentPath === "" ? "is-active" : "",
-    ]}
-    href={`/`}
-    title="Home"
-    aria-label="Home"
-  >
-    <Icon name="home" size="m" />
-  </a>
-
-  <a
-    class:list={[
-      "site-navigation__link",
-      currentPath === "snippets" ? "is-active" : "",
-    ]}
-    href={`/snippets`}
-    title="Snippets"
-    aria-label="Snippets"
-  >
-    <Icon name="snippet" size="m" />
-  </a>
-
-  <a
-    class:list={[
-      "site-navigation__link",
-      currentPath === "udhr" ? "is-active" : "",
-    ]}
-    href={`/udhr`}
-    title="UDHR"
-    aria-label="UDHR"
-  >
-    <Icon name="udhr" size="m" />
-  </a>
-
-  <a
-    class:list={[
-      "site-navigation__link",
-      currentPath === "tags" ? "is-active" : "",
-    ]}
-    href={`/tags`}
-    title="Tags"
-    aria-label="Tags"
-  >
-    <Icon name="hashtag" size="m" />
-  </a>
-
-  <a
-    class:list={[
-      "site-navigation__link",
-      currentPath === "authors" ? "is-active" : "",
-    ]}
-    href={`/authors`}
-    title="Authors"
-    aria-label="Authors"
-  >
-    <Icon name="person" size="m" />
-  </a>
+  {
+    links.map((link) => (
+      <Link
+        class:list={[
+          "site-navigation__link",
+          currentPath === link.path ? "is-active" : "",
+        ]}
+        href={`${link.path}`}
+        title={link.label}
+        aria-label={link.label}
+      >
+        <Icon name={link.icon} size="m" />
+      </Link>
+    ))
+  }
 </nav>
 
 <style>

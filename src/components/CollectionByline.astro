@@ -2,11 +2,9 @@
 // astro
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+
 // utils
-import {
-  i18nFormatDate,
-  removeUrlProtocol,
-} from "../lib/utils/index.ts";
+import { i18nFormatDate, removeUrlProtocol } from "../lib/utils/index.ts";
 
 // components
 import Debug from "./Debug.astro";
@@ -16,42 +14,48 @@ const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
 
 // astro props
 interface Props {
-  entry: CollectionEntry<"snippets"> | CollectionEntry<"udhr">;
+  collection: CollectionEntry<"snippets"> | CollectionEntry<"udhr">;
 }
-const { entry } = Astro.props;
+const { collection } = Astro.props;
 
 // do stuff
-const authorSlug = entry.data.author.slug || SITE_AUTHOR;
+type AuthorType = {
+  slug: string;
+  collection: "authors";
+};
+const author: AuthorType = collection.data.author || {
+  slug: SITE_AUTHOR,
+  collection: "authors",
+};
 
 let bylinePrefix = "Added ";
-if (entry.collection !== "udhr" && entry.data.author.slug) {
-  bylinePrefix = entry.data.author.slug == SITE_AUTHOR
-      ? "By "
-      : "Inspired by ";
+if (collection.collection !== "udhr") {
+  bylinePrefix = author.slug == SITE_AUTHOR ? "By " : "Inspired by ";
 }
 
 let basedOnUrl = "";
-if (entry.collection == "snippets" && entry.data.isBasedOnUrl) {
-  basedOnUrl = entry.data.isBasedOnUrl;
+if (collection.collection == "snippets" && collection.data.isBasedOnUrl) {
+  basedOnUrl = collection.data.isBasedOnUrl;
 }
-if (entry.collection == "udhr" && entry.data.url) {
-  basedOnUrl = entry.data.url;
+if (collection.collection == "udhr" && collection.data.url) {
+  basedOnUrl = collection.data.url;
 }
 
-const collection = (await getEntry(
-  "authors",
-  authorSlug,
-)) as CollectionEntry<"authors">;
+const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
 ---
 
 <div class:list={["byline", "collection-navigation__byline"]}>
   {bylinePrefix}{" "}
 
   {
-    entry.collection !== "udhr" && (
+    collection.collection !== "udhr" && (
       <>
-        <a class="byline__link" href={`/${collection.collection}/${authorSlug}/`} title="">
-          {collection.data.name || `@${collection.data.alias}`}
+        <a
+          class="byline__link"
+          href={`/${collectionAuthor.collection}/${collectionAuthor.slug}/`}
+          title=""
+        >
+          {collectionAuthor.data.name || `@${collectionAuthor.data.alias}`}
         </a>
         {". "}
       </>
@@ -59,17 +63,17 @@ const collection = (await getEntry(
   }
 
   {
-    entry.data.pubDate && (
-        <time datetime={entry.data.pubDate}>
-          {i18nFormatDate({ dateString: entry.data.pubDate })}
-        </time>
+    collection.data.pubDate && (
+      <time datetime={collection.data.pubDate}>
+        {i18nFormatDate({ dateString: collection.data.pubDate })}
+      </time>
     )
   }
 
   {
     basedOnUrl && (
       <>
-      {". "}
+        {". "}
         <a
           class="byline__link"
           href={basedOnUrl}
@@ -84,7 +88,7 @@ const collection = (await getEntry(
   }
 </div>
 
-<Debug item={entry} />
+<Debug item={collection} />
 
 <style>
   .byline {

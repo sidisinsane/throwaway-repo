@@ -7,29 +7,39 @@ import AuthorSocial from "./AuthorSocial.astro";
 import Debug from "./Debug.astro";
 
 // env
+type AuthorType = {
+  slug: string;
+  collection: "authors";
+};
 const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+const DEFAULT_AUTHOR: AuthorType = {
+  slug: SITE_AUTHOR,
+  collection: "authors",
+};
 
 // astro props
 interface Props {
-  authorSlug?: string;
+  author?: AuthorType;
 }
-const { authorSlug = SITE_AUTHOR } = Astro.props;
+const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
 const collectionAuthor = (await getEntry(
-  "authors",
-  authorSlug,
+  author as AuthorType,
 )) as CollectionEntry<"authors">;
 ---
 
 <div class="author-bar">
   <h2 class="author-bar__author">
-    <a class="author-bar__link" href={`/${collectionAuthor.collection}/${authorSlug}/`} title=""
+    <a
+      class="author-bar__link"
+      href={`/${collectionAuthor.collection}/${collectionAuthor.slug}/`}
+      title=""
       >{collectionAuthor.data.name || `@${collectionAuthor.data.alias}`}</a
     >
   </h2>
   <div class="author-bar__social">
-    <AuthorSocial authorSlug={authorSlug} />
+    <AuthorSocial author={author as AuthorType} />
   </div>
 </div>
 

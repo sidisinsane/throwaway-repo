@@ -13,7 +13,7 @@ import Layout from "../../layouts/BaseLayout.astro";
 
 // astro props
 interface Props {
-  entries: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
+  collection: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
 }
 
 export async function getStaticPaths() {
@@ -44,21 +44,25 @@ export async function getStaticPaths() {
     ) as CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
     return {
       params: { tag },
-      props: { entries: entriesFiltered },
+      props: { collection: entriesFiltered },
     };
   });
 }
 
 const { tag } = Astro.params;
-const { entries } = Astro.props;
+const { collection } = Astro.props;
 ---
 
 <Layout title={tag}>
-  <CollectionHero collection={entries} isTag={true}>
+  <CollectionHero collection={collection} isTag={true}>
     {tag}
   </CollectionHero>
 
-  <CollectionSection title={tag as string} collection={entries} isTag={true} />
+  <CollectionSection
+    title={tag as string}
+    collection={collection}
+    isTag={true}
+  />
 
-  <Debug item={entries} debug={false} />
+  <Debug item={collection} />
 </Layout>

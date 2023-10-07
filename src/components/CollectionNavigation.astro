@@ -19,28 +19,28 @@ const { collection } = Astro.props;
       <ul class="collection-navigation__list">
         {collection.map((entry) => (
           <li class="collection-navigation__item">
-              <a
-                class="collection-navigation__link"
-                href={`/${entry.collection}/${entry.slug}`}
-                title={entry.data.title}
-              >
-                <h4 class="collection-navigation__title">
-                  {entry.collection == "snippets" && entry.data.codepenSlug && (
-                    <Icon name="codepen" />
-                  )}
-                  {entry.data.title}
-                </h4>
-
-                {entry.data.description && (
-                  <p class="collection-navigation__description">
-                    {entry.data.description}
-                  </p>
+            <a
+              class="collection-navigation__link"
+              href={`/${entry.collection}/${entry.slug}`}
+              title={entry.data.title}
+            >
+              <h4 class="collection-navigation__title">
+                {entry.collection == "snippets" && entry.data.codepenSlug && (
+                  <Icon name="codepen" />
                 )}
-              </a>
+                {entry.data.title}
+              </h4>
 
-              <div class="collection-navigation__byline">
-                <CollectionByline entry={entry} />
-              </div>
+              {entry.data.description && (
+                <p class="collection-navigation__description">
+                  {entry.data.description}
+                </p>
+              )}
+            </a>
+
+            <div class="collection-navigation__byline">
+              <CollectionByline collection={entry} />
+            </div>
           </li>
         ))}
       </ul>

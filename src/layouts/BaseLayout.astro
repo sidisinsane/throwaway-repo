@@ -2,15 +2,12 @@
 import "../styles/global.css";
 
 import PageScrollProgressIndicator from "../components/PageScrollProgressIndicator.astro";
+// import SiteNavigation from "../components/SiteNavigation.astro";
 
-// env 
-const SITE_LOCALE = (import.meta.env.SITE_LOCALE || "en-US") as keyof typeof Intl.Locale;
+// env
+const SITE_LOCALE = (import.meta.env.SITE_LOCALE ||
+  "en-US") as keyof typeof Intl.Locale;
 const SITE_TITLE = import.meta.env.SITE_TITLE || "Frontend Snippets";
-
-type AuthorType = {
-  slug: string;
-  collection: "authors";
-}
 
 interface Props {
   locale?: keyof typeof Intl.Locale;
@@ -18,11 +15,7 @@ interface Props {
   description?: string;
 }
 
-const {
-  locale = SITE_LOCALE,
-  title = SITE_TITLE,
-  description
-} = Astro.props;
+const { locale = SITE_LOCALE, title = SITE_TITLE, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -36,6 +29,12 @@ const {
   </head>
   <body>
     <PageScrollProgressIndicator />
+
+    <!-- <div class="navbar">
+      <SiteNavigation />
+
+      <slot name="pagination" />
+    </div> -->
 
     <div class="page">
       <main class="main">

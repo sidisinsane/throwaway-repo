@@ -7,15 +7,23 @@ import CollectionTags from "./CollectionTags.astro";
 import CollectionAuthorBar from "./CollectionAuthorBar.astro";
 
 // env
+type AuthorType = {
+  slug: string;
+  collection: "authors";
+};
 const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+const DEFAULT_AUTHOR: AuthorType = {
+  slug: SITE_AUTHOR,
+  collection: "authors",
+};
 
 // astro props
 interface Props {
   collection: CollectionEntry<"snippets">[] | CollectionEntry<"udhr">[];
-  authorSlug?: string;
+  author?: AuthorType;
   isTag?: boolean;
 }
-const { collection, authorSlug = SITE_AUTHOR, isTag } = Astro.props;
+const { collection, author = DEFAULT_AUTHOR, isTag } = Astro.props;
 ---
 
 <header class="hero">
@@ -27,7 +35,7 @@ const { collection, authorSlug = SITE_AUTHOR, isTag } = Astro.props;
     {
       !isTag && (
         <div class="hero__about">
-          <CollectionAuthorBar authorSlug={authorSlug} />
+          <CollectionAuthorBar author={author} />
         </div>
       )
     }

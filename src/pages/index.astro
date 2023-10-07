@@ -2,10 +2,12 @@
 // astro
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+
 // components
 import CollectionHero from "../components/CollectionHero.astro";
 import CollectionSection from "../components/CollectionSection.astro";
 import Debug from "../components/Debug.astro";
+
 // layout
 import Layout from "../layouts/BaseLayout.astro";
 
@@ -20,7 +22,7 @@ if (collectionSnippets) {
     const objB: Date = new Date(b.data.pubDate);
 
     return objB.getTime() - objA.getTime();
-  })
+  });
 }
 
 const collectionUdhr = (await getCollection("udhr", ({ data }) => {
@@ -41,10 +43,11 @@ if (collectionUdhr) {
   });
 }
 
-const collection = [...collectionSnippets, ...collectionUdhr] as (CollectionEntry<"snippets">[]
-  | CollectionEntry<"udhr">[]);
+const collection = [...collectionSnippets, ...collectionUdhr] as
+  | CollectionEntry<"snippets">[]
+  | CollectionEntry<"udhr">[];
 
-
+// do stuff
 const debug = false;
 const layoutTitle = "Home";
 
@@ -53,7 +56,7 @@ const sections = [
     title: "Snippets",
     description:
       "A collection of frontend snippets. Some of them are published on CodePen.",
-    collection: collectionSnippets
+    collection: collectionSnippets,
   },
   {
     title: "UDHR",
@@ -67,7 +70,7 @@ const sections = [
 <Layout title={layoutTitle}>
   <CollectionHero collection={collection} />
 
-  { sections.map(section => <CollectionSection {...section} />) }
-  
+  {sections.map((section) => <CollectionSection {...section} />)}
+
   <Debug item={collection} debug={debug} />
 </Layout>

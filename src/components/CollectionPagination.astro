@@ -8,20 +8,23 @@ import Icon from "./Icon.astro";
 
 // astro props
 interface Props {
-  entry: CollectionEntry<"snippets"> | CollectionEntry<"udhr">;
+  collection: CollectionEntry<"snippets"> | CollectionEntry<"udhr">;
   index: number;
   total: number;
   prev: any | null;
   next: any | null;
 }
 
-const { entry, index, total, prev, next } = Astro.props;
+const { collection, index, total, prev, next } = Astro.props;
 ---
 
 <nav class="pagination">
   {
     prev && (
-      <Link href={`/${entry.collection}/${prev.slug}/`} title={prev.data.title}>
+      <Link
+        href={`/${collection.collection}/${prev.slug}/`}
+        title={prev.data.title}
+      >
         <Icon name="previous" size="m" />
       </Link>
     )
@@ -31,7 +34,10 @@ const { entry, index, total, prev, next } = Astro.props;
 
   {
     next && (
-      <Link href={`/${entry.collection}/${next.slug}/`} title={next.data.title}>
+      <Link
+        href={`/${collection.collection}/${next.slug}/`}
+        title={next.data.title}
+      >
         <Icon name="next" size="m" />
       </Link>
     )

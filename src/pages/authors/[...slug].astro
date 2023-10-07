@@ -13,36 +13,46 @@ import Layout from "../../layouts/BaseLayout.astro";
 
 // astro props
 interface Props {
-  entry: CollectionEntry<"authors">;
+  collection: CollectionEntry<"authors">;
 }
 
 export async function getStaticPaths() {
-  const entries = await getCollection("authors");
-  return entries.map((entry) => ({
+  const collection = await getCollection("authors");
+  return collection.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry: entry },
+    props: { collection: entry },
   }));
 }
 
-const { entry } = Astro.props;
-const authorSlug = entry.data.alias;
+const { collection } = Astro.props;
+const { slug } = Astro.params;
 
 const authorSnippets = (await getCollection("snippets", ({ data }) => {
-  return data.author.slug == authorSlug;
+  return data.author.slug == slug;
 })) as CollectionEntry<"snippets">[];
 
-const { Content } = await entry.render();
+const { Content } = await collection.render();
+
+const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
+type AuthorType = {
+  slug: string;
+  collection: "authors";
+};
+const author: AuthorType = {
+  slug: slug || SITE_AUTHOR,
+  collection: "authors",
+};
 ---
 
-<Layout title={authorSlug}>
-  <CollectionHero collection={authorSnippets} authorSlug={authorSlug}>
+<Layout title={slug}>
+  <CollectionHero collection={authorSnippets} author={author}>
     <Content />
   </CollectionHero>
 
   <CollectionSection title="Snippets" collection={authorSnippets} />
 
   <>
-    <Debug item={`authorSlug: ${authorSlug}`} />
+    <Debug item={author} />
     <Debug item={authorSnippets} />
   </>
 </Layout>

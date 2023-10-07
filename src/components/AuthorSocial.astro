@@ -8,20 +8,28 @@ import SocialLink from "./SocialLink.astro";
 import Debug from "./Debug.astro";
 
 // env
+type AuthorType = {
+  slug: string;
+  collection: "authors";
+};
 const SITE_AUTHOR = import.meta.env.SITE_AUTHOR || "sidisinsane";
-
+const DEFAULT_AUTHOR: AuthorType = {
+  slug: SITE_AUTHOR,
+  collection: "authors",
+};
 // astro props
 interface Props {
-  authorSlug?: string;
+  author: AuthorType;
 }
-const { authorSlug = SITE_AUTHOR } = Astro.props;
+const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
 // 1. Get single entry from given author
-const collectionAuthor = (await getEntry(
-  "authors",
-  authorSlug,
-)) as CollectionEntry<"authors">;
+/*const currentAuthor = entry.data.author || {
+  slug: SITE_AUTHOR,
+  collection: "authors",
+};*/
+const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
 
 // 2. Filter all non-linkable entries from profile data
 const social = Object.fromEntries(
@@ -38,12 +46,11 @@ const linksCount = linksCountChar.repeat(socialCount);
 <div class="social" style=`--links-count: "${linksCount}";`>
   <nav class="social__navigation">
     {
-      Object.keys(social).filter(key => key !== "email").map((service) => (
-        <SocialLink
-          service={service}
-          alias={social[service] as string}
-        />
-      ))
+      Object.keys(social)
+        .filter((key) => key !== "email")
+        .map((service) => (
+          <SocialLink service={service} alias={social[service] as string} />
+        ))
     }
   </nav>
 
