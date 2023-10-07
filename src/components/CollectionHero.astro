@@ -3,7 +3,7 @@
 import type { CollectionEntry } from "astro:content";
 
 // components
-import CollectionTags from "./CollectionTags.astro";
+// import CollectionTags from "./CollectionTags.astro";
 import CollectionAuthorBar from "./CollectionAuthorBar.astro";
 
 // env
@@ -30,7 +30,7 @@ const { collection, author = DEFAULT_AUTHOR, isTag } = Astro.props;
   <div class="hero__inner">
     <slot />
 
-    {!isTag && <CollectionTags collection={collection} />}
+    <!-- {!isTag && <CollectionTags collection={collection} />} -->
 
     {
       !isTag && (
