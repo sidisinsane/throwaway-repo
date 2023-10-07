@@ -3,7 +3,7 @@
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 // components
-import AuthorSocial from "./AuthorSocial.astro";
+import AuthorSocialBar from "./AuthorSocialBar.astro";
 import Debug from "./Debug.astro";
 
 // env
@@ -38,7 +38,7 @@ const authorName = (collectionAuthor?.data?.name ||
     <a class="author-bar__link" href={authorHref} title="">{authorName}</a>
   </h2>
   <div class="author-bar__social">
-    <AuthorSocial author={author} />
+    <AuthorSocialBar author={author} />
   </div>
 </div>
 

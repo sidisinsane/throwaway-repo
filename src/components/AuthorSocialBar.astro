@@ -17,6 +17,7 @@ const DEFAULT_AUTHOR: AuthorType = {
   slug: SITE_AUTHOR,
   collection: "authors",
 };
+
 // astro props
 interface Props {
   author: AuthorType;
@@ -24,11 +25,6 @@ interface Props {
 const { author = DEFAULT_AUTHOR } = Astro.props;
 
 // do stuff
-// 1. Get single entry from given author
-/*const currentAuthor = entry.data.author || {
-  slug: SITE_AUTHOR,
-  collection: "authors",
-};*/
 const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
 
 // 2. Filter all non-linkable entries from profile data
@@ -46,38 +42,40 @@ if (collectionAuthor?.data) {
   ) as SocialType;
 
   if (social) {
-    socialCount = Object.entries(social).length as number;
     socialLinkKeys = Object.keys(social).filter(
       (key) => key !== "email",
     ) as string[];
+    socialCount = Object.entries(social).length as number;
   }
 }
+
 const linksCountChar = "·";
 const linksCount = linksCountChar.repeat(socialCount);
 ---
 
-<div class="social" style=`--links-count: "${linksCount}";`>
-  <nav class="social__navigation">
-    {
-      social &&
-        socialLinkKeys &&
-        socialLinkKeys.map((key) => (
-          <SocialLink service={key} alias={social[key]} />
-        ))
-    }
-  </nav>
-
+<div class="author-social-bar" style=`--links-count: "${linksCount}";`>
+  {
+    collectionAuthor && (
+      <nav class="author-social-bar__navigation">
+        {social &&
+          socialLinkKeys &&
+          socialLinkKeys.map((key) => (
+            <SocialLink service={key} alias={social[key]} />
+          ))}
+      </nav>
+    )
+  }
   {
     collectionAuthor?.data?.email && (
-      <p class="email">{collectionAuthor?.data?.email}</p>
+      <p class="author-social-bar__email">{collectionAuthor?.data?.email}</p>
     )
   }
 </div>
 
-<!-- {social && <Debug item={social} />} -->
+{social && <Debug item={social} />}
 
 <style>
-  .social {
+  .author-social-bar {
     --links-count: "·";
 
     color: var(--fg);
@@ -89,14 +87,14 @@ const linksCount = linksCountChar.repeat(socialCount);
     row-gap: calc(var(--gap) / 4);
   }
 
-  .social__navigation {
+  .author-social-bar__navigation {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: calc(var(--gap) / 3);
   }
 
-  .social__navigation::before {
+  .author-social-bar__navigation::before {
     content: var(--links-count);
   }
 
