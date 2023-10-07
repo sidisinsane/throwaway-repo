@@ -32,30 +32,40 @@ const { author = DEFAULT_AUTHOR } = Astro.props;
 const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
 
 // 2. Filter all non-linkable entries from profile data
-// type SocialType = Record<string, string>;
+type SocialType = Record<string, string>;
 
-// const social = Object.fromEntries(
-//   Object.entries(collectionAuthor?.data).filter(
-//     ([key]) => !["isDraft", "name", "alias"].includes(key),
-//   ),
-// ) as SocialType;
-const socialCount = 0; // Object.entries(social).length as number;
+let social = {} as SocialType;
+let socialLinkKeys = [] as string[];
+let socialCount = 0;
 
+if (collectionAuthor?.data) {
+  social = Object.fromEntries(
+    Object.entries(collectionAuthor?.data).filter(
+      ([key]) => !["isDraft", "name", "alias"].includes(key),
+    ),
+  ) as SocialType;
+
+  if (social) {
+    socialCount = Object.entries(social).length as number;
+    socialLinkKeys = Object.keys(social).filter(
+      (key) => key !== "email",
+    ) as string[];
+  }
+}
 const linksCountChar = "·";
 const linksCount = linksCountChar.repeat(socialCount);
 ---
 
 <div class="social" style=`--links-count: "${linksCount}";`>
-  <!-- <nav class="social__navigation">
+  <nav class="social__navigation">
     {
       social &&
-        Object.keys(social)
-          .filter((key) => key !== "email")
-          .map((service) => (
-            <SocialLink service={service} alias={social[service] as string} />
-          ))
+        socialLinkKeys &&
+        socialLinkKeys.map((key) => (
+          <SocialLink service={key} alias={social[key]} />
+        ))
     }
-  </nav> -->
+  </nav>
 
   {
     collectionAuthor?.data?.email && (
