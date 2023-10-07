@@ -32,11 +32,13 @@ const { author = DEFAULT_AUTHOR } = Astro.props;
 const collectionAuthor = (await getEntry(author)) as CollectionEntry<"authors">;
 
 // 2. Filter all non-linkable entries from profile data
+type SocialType = Record<string, string>;
+
 const social = Object.fromEntries(
   Object.entries(collectionAuthor?.data).filter(
     ([key]) => !["isDraft", "name", "alias"].includes(key),
   ),
-);
+) as SocialType;
 const socialCount = Object.entries(social).length as number;
 
 const linksCountChar = "·";
@@ -46,22 +48,23 @@ const linksCount = linksCountChar.repeat(socialCount);
 <div class="social" style=`--links-count: "${linksCount}";`>
   <nav class="social__navigation">
     {
-      Object.keys(social)
-        .filter((key) => key !== "email")
-        .map((service) => (
-          <SocialLink service={service} alias={social[service] as string} />
-        ))
+      social &&
+        Object.keys(social)
+          .filter((key) => key !== "email")
+          .map((service) => (
+            <SocialLink service={service} alias={social[service] as string} />
+          ))
     }
   </nav>
 
   {
-    collectionAuthor?.data["email"] && (
-      <p class="email">{collectionAuthor?.data["email"]}</p>
+    collectionAuthor?.data?.email && (
+      <p class="email">{collectionAuthor?.data?.email}</p>
     )
   }
 </div>
 
-<Debug item={social} />
+{social && <Debug item={social} />}
 
 <style>
   .social {
