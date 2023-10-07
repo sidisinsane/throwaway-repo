@@ -3,7 +3,7 @@
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 // components
-import AuthorSocial from "./AuthorSocial.astro";
+// import AuthorSocial from "./AuthorSocial.astro";
 import Debug from "./Debug.astro";
 
 // env
@@ -38,9 +38,9 @@ const collectionAuthor = (await getEntry(
       >{collectionAuthor.data.name || `@${collectionAuthor.data.alias}`}</a
     >
   </h2>
-  <div class="author-bar__social">
+  <!-- <div class="author-bar__social">
     <AuthorSocial author={author as AuthorType} />
-  </div>
+  </div> -->
 </div>
 
 <Debug item={collectionAuthor} debug={false} />
